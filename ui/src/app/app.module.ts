@@ -7,18 +7,20 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { CoposComponent } from './copos/copos.component';
 import { NotCoposComponent } from './not-copos/not-copos.component';
 import { ResultsComponent } from './results/results.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainMenuComponent,
     CoposComponent,
+    MainMenuComponent,
     NotCoposComponent,
-    ResultsComponent
+    ResultsComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

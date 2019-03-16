@@ -1,13 +1,13 @@
-import { CoposComponent } from './copos/copos.component';
-import { NotCoposComponent } from './not-copos/not-copos.component';
+import { MacacoComponent } from './macaco/macaco.component';
+import { HumanoComponent } from './humano/humano.component';
 
 export const lobbyRoutes = [
     {
-        path: 'copos',
-        component: CoposComponent
+        path: 'macaco',
+        component: MacacoComponent
       },
       {
-        path: 'notCopos',
-        component: NotCoposComponent
+        path: 'humano',
+        component: HumanoComponent
       },
 ]

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoposComponent } from './copos/copos.component';
-import { NotCoposComponent } from './not-copos/not-copos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { lobbyRoutes } from './lobby.routes';
+import { MacacoComponent } from './macaco/macaco.component';
+import { HumanoComponent } from './humano/humano.component';
 
 @NgModule({
   declarations: [
-    CoposComponent,
-    NotCoposComponent
+    MacacoComponent,
+    HumanoComponent
   ],
   imports: [
     CommonModule,

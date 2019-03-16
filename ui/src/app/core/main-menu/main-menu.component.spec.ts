@@ -40,29 +40,29 @@ describe('MainMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Copos button', () => {
+  describe('Macaco button', () => {
     it('should exist', () => {
-      expect(fixture.debugElement.query(By.css('button#coposButton.btn'))).not.toBeNull();
-      expect(fixture.debugElement.query(By.css('button#coposButton.btn')).nativeElement.innerText).toContain('Copos');
+      expect(fixture.debugElement.query(By.css('button#macacoButton.btn'))).not.toBeNull();
+      expect(fixture.debugElement.query(By.css('button#macacoButton.btn')).nativeElement.innerText).toContain('Macaco');
     });
     
-    it('should redirect to Copos page', () => {
+    it('should redirect to Macaco page', () => {
       spyOn(router, 'navigate');
-      component.onCoposClick();
-      expect(router.navigate).toHaveBeenCalledWith(['copos']);
+      component.onMacacoClick();
+      expect(router.navigate).toHaveBeenCalledWith(['macaco']);
     });
   });
 
-  describe('Not Copos button', () => {
+  describe('Humano button', () => {
     it('should exist', () => {
-      expect(fixture.debugElement.query(By.css('button#notCoposButton.btn'))).not.toBeNull();
-      expect(fixture.debugElement.query(By.css('button#notCoposButton.btn')).nativeElement.innerText).toContain('Not Copos');
+      expect(fixture.debugElement.query(By.css('button#humanoButton.btn'))).not.toBeNull();
+      expect(fixture.debugElement.query(By.css('button#humanoButton.btn')).nativeElement.innerText).toContain('Humano');
     });
 
-    it('should redirect to Not Copos page', () => {
+    it('should redirect to Humano page', () => {
       spyOn(router, 'navigate');
-      component.onNotCoposClick();
-      expect(router.navigate).toHaveBeenCalledWith(['notCopos']);
+      component.onHumanoClick();
+      expect(router.navigate).toHaveBeenCalledWith(['humano']);
     });
   });
 

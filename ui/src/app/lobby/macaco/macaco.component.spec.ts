@@ -1,22 +1,24 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
-import { CoposComponent } from './copos.component';
+import { MacacoComponent } from './macaco.component';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CoposVote } from 'src/app/core/voting/copos-vote.model';
+import { MacacoVote } from 'src/app/core/voting/macaco-vote.model';
 import { VotingService } from 'src/app/core/voting/voting.service';
 import { CoreModule } from 'src/app/core/core.module';
 import { of } from 'rxjs';
 
-describe('CoposComponent', () => {
-  let component: CoposComponent;
-  let fixture: ComponentFixture<CoposComponent>;
+describe('MacacoComponent', () => {
+  let component: MacacoComponent;
+  let fixture: ComponentFixture<MacacoComponent>;
 
   let votingService: VotingService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoposComponent ],
+      declarations: [
+        MacacoComponent
+      ],
       imports: [
         ReactiveFormsModule,
         CoreModule,
@@ -38,7 +40,7 @@ describe('CoposComponent', () => {
   ));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoposComponent);
+    fixture = TestBed.createComponent(MacacoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -56,15 +58,15 @@ describe('CoposComponent', () => {
         expect(fixture.debugElement.query(By.css('button.btn-yes'))).not.toBeNull();
       });
   
-      it('should cast positive CoposVote when clicking', () => {
+      it('should cast positive MacacoVote when clicking', () => {
         const name = "test-movie-name";
         component.name.setValue(name);
         
-        spyOn(votingService, 'castCoposVote').and.returnValue(of({}));
+        spyOn(votingService, 'castMacacoVote').and.returnValue(of({}));
   
         fixture.debugElement.query(By.css('button.btn-yes')).nativeElement.click();
   
-        expect(votingService.castCoposVote).toHaveBeenCalledWith(name, true);
+        expect(votingService.castMacacoVote).toHaveBeenCalledWith(name, true);
       });
     });
 
@@ -73,15 +75,15 @@ describe('CoposComponent', () => {
         expect(fixture.debugElement.query(By.css('button.btn-no'))).not.toBeNull();
       });
   
-      it('should generate a negative CoposVote when clicking the button', () => {
+      it('should generate a negative MacacoVote when clicking the button', () => {
         const name = "test-movie-name";
         component.name.setValue(name);
         
-        spyOn(votingService, 'castCoposVote').and.returnValue(of({}));
+        spyOn(votingService, 'castMacacoVote').and.returnValue(of({}));
   
         fixture.debugElement.query(By.css('button.btn-no')).nativeElement.click();
   
-        expect(votingService.castCoposVote).toHaveBeenCalledWith(name, false);
+        expect(votingService.castMacacoVote).toHaveBeenCalledWith(name, false);
       });      
     });
   });

@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HumanoComponent } from './humano.component';
 
-import { NotCoposComponent } from './not-copos.component';
-
-describe('NotCoposComponent', () => {
-  let component: NotCoposComponent;
-  let fixture: ComponentFixture<NotCoposComponent>;
+describe('HumanoComponent', () => {
+  let component: HumanoComponent;
+  let fixture: ComponentFixture<HumanoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotCoposComponent ]
+      declarations: [ HumanoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotCoposComponent);
+    fixture = TestBed.createComponent(HumanoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

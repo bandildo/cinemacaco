@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CoposVote } from 'src/app/core/voting/copos-vote.model';
+import { MacacoVote } from 'src/app/core/voting/macaco-vote.model';
 import { VotingService } from 'src/app/core/voting/voting.service';
 
 @Component({
-  selector: 'app-copos',
-  templateUrl: './copos.component.html',
-  styleUrls: ['./copos.component.css']
+  templateUrl: './macaco.component.html',
+  styleUrls: ['./macaco.component.css']
 })
 
-export class CoposComponent {
+export class MacacoComponent {
   name = new FormControl('');
 
-  vote: CoposVote;
+  vote: MacacoVote;
 
   constructor(private votingService: VotingService) {
   }
 
   onVote(thumbsUp: boolean) {
-    this.votingService.castCoposVote(this.name.value, thumbsUp).subscribe();
+    this.votingService.castMacacoVote(this.name.value, thumbsUp).subscribe();
   }
 }

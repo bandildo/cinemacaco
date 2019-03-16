@@ -13,11 +13,11 @@ export class MainMenuComponent {
     this.router.navigate(['results']);
   }
 
-  onNotCoposClick() {
-    this.router.navigate(['notCopos']);
+  onHumanoClick() {
+    this.router.navigate(['humano']);
   }
 
-  onCoposClick() {
-    this.router.navigate(['copos']);
+  onMacacoClick() {
+    this.router.navigate(['macaco']);
   }
 }

@@ -2,7 +2,7 @@ import { VotingService } from "./voting.service";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { async, TestBed, inject } from '@angular/core/testing';
 import { CoreModule } from '../core.module';
-import { CoposVote } from './copos-vote.model';
+import { MacacoVote } from './macaco-vote.model';
 
 describe('Voting Service', () => {
     let service: VotingService;
@@ -33,7 +33,7 @@ describe('Voting Service', () => {
     }));
 
     describe('UPDATE', () => {
-        it('should post a copos vote', () => {
+        it('should post a Macaco vote', () => {
             const name = "test-movie-name";
             const timestamp = new Date();
 
@@ -41,12 +41,12 @@ describe('Voting Service', () => {
               name,
               thumbsUp: true,
               timestamp
-            } as CoposVote;
+            } as MacacoVote;
 
             jasmine.clock().mockDate(timestamp);
             
-            service.castCoposVote(name, true).subscribe(
-                (coposVote: CoposVote) => {
+            service.castMacacoVote(name, true).subscribe(
+                (coposVote: MacacoVote) => {
                     expect(coposVote).toEqual(expectedVote);
                 },
                 error => fail(error)

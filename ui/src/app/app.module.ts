@@ -3,24 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainMenuComponent } from './main-menu/main-menu.component';
-import { CoposComponent } from './copos/copos.component';
-import { NotCoposComponent } from './not-copos/not-copos.component';
-import { ResultsComponent } from './results/results.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { StatisticsModule } from './statistics/statistics.module';
+import { LobbyModule } from './lobby/lobby.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoposComponent,
-    MainMenuComponent,
-    NotCoposComponent,
-    ResultsComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    ReactiveFormsModule
+    CoreModule,
+    LobbyModule,
+    StatisticsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,27 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainMenuComponent } from './main-menu/main-menu.component';
-import { CoposComponent } from './copos/copos.component';
-import { NotCoposComponent } from './not-copos/not-copos.component';
-import { ResultsComponent } from './results/results.component';
+import { MainMenuComponent } from './core/main-menu/main-menu.component';
 
 const routes: Routes = [
   {
-    path: 'copos',
-    component: CoposComponent
+    path: 'lobby',
+    loadChildren: 'app/lobby/lobby.module#LobbyModule',
   },
   {
-    path: 'notCopos',
-    component: NotCoposComponent
-  },
-  {
-    path: 'results',
-    component: ResultsComponent
+    path: 'statistics',
+    loadChildren: 'app/statistics/statistics.module#StatisticsModule',
   },
   {
     path: '',
     component: MainMenuComponent
   },
+
+
 ];
 
 @NgModule({

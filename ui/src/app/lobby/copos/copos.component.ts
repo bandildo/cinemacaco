@@ -18,12 +18,6 @@ export class CoposComponent {
   }
 
   onVote(thumbsUp: boolean) {
-    let vote = {
-      name: this.name.value,
-      thumbsUp,
-      timestamp: new Date()
-    } as CoposVote;
-
-    this.votingService.castCoposVote(vote);
+    this.votingService.castCoposVote(this.name.value, thumbsUp).subscribe();
   }
 }

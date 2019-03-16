@@ -5,7 +5,6 @@ import { NotCoposComponent } from './not-copos/not-copos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { lobbyRoutes } from './lobby.routes';
-import { VotingService } from '../core/voting/voting.service';
 
 @NgModule({
   declarations: [

@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CoposVote } from 'src/app/core/voting/copos-vote.model';
 import { VotingService } from 'src/app/core/voting/voting.service';
 import { CoreModule } from 'src/app/core/core.module';
+import { of } from 'rxjs';
 
 describe('CoposComponent', () => {
   let component: CoposComponent;
@@ -49,31 +50,39 @@ describe('CoposComponent', () => {
   });
 
   describe('Voting buttons', () => {
-    it('should have a YES button', () => {
-      expect(fixture.debugElement.query(By.css('button.btn-yes'))).not.toBeNull();
+
+    describe('YES button', () => {
+      it('should exist', () => {
+        expect(fixture.debugElement.query(By.css('button.btn-yes'))).not.toBeNull();
+      });
+  
+      it('should cast positive CoposVote when clicking', () => {
+        const name = "test-movie-name";
+        component.name.setValue(name);
+        
+        spyOn(votingService, 'castCoposVote').and.returnValue(of({}));
+  
+        fixture.debugElement.query(By.css('button.btn-yes')).nativeElement.click();
+  
+        expect(votingService.castCoposVote).toHaveBeenCalledWith(name, true);
+      });
     });
 
-    it('should generate a positive CoposVote ', () => {
-      const name = "test-movie-name";
-      const timestamp = new Date();
-      const expectedVote = {
-        name,
-        thumbsUp: true,
-        timestamp
-      } as CoposVote;
-
-      component.name.setValue('test-movie-name');
-      
-      jasmine.clock().mockDate(timestamp);
-      spyOn(votingService, 'castCoposVote');
-
-      component.onVote(true);
-
-      expect(votingService.castCoposVote).toHaveBeenCalledWith(expectedVote);
-    });
-
-    it('should have a NO button', () => {
-      expect(fixture.debugElement.query(By.css('button.btn-no'))).not.toBeNull();
+    describe('NO button', () => {
+      it('should have a NO button', () => {
+        expect(fixture.debugElement.query(By.css('button.btn-no'))).not.toBeNull();
+      });
+  
+      it('should generate a negative CoposVote when clicking the button', () => {
+        const name = "test-movie-name";
+        component.name.setValue(name);
+        
+        spyOn(votingService, 'castCoposVote').and.returnValue(of({}));
+  
+        fixture.debugElement.query(By.css('button.btn-no')).nativeElement.click();
+  
+        expect(votingService.castCoposVote).toHaveBeenCalledWith(name, false);
+      });      
     });
   });
 });

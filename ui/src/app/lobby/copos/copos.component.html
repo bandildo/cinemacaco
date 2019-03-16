@@ -5,5 +5,11 @@
          [formControl]="name"
          placeholder="e.g. Inception">
 </label>
-<button class="btn btn-yes">SIM</button>
-<button class="btn btn-no">NÃO</button>
+<button class="btn btn-yes"
+        (click)="onVote(true)">
+          SIM
+</button>
+<button class="btn btn-no"
+        (click)="onVote(false)">
+          NÃO
+</button>

@@ -1,4 +1,6 @@
-import { MacacoVote } from 'src/app/core/voting/macaco-vote.model';
+import { CoreModule } from 'src/app/core/core.module';
+import { LobbyModule } from './../lobby.module';
+import { Vote } from 'src/app/core/voting/vote.model';
 import { ActivatedRoute } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HumanoComponent } from './humano.component';
@@ -10,13 +12,12 @@ describe('HumanoComponent', () => {
   let fixture: ComponentFixture<HumanoComponent>;
 
   const data = {
-    currentGame: {} as MacacoVote
+    currentGame: {} as Vote
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HumanoComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, LobbyModule, CoreModule],
       providers: [
         {
           provide: ActivatedRoute,

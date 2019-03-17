@@ -5,11 +5,11 @@ import { MainMenuComponent } from './core/main-menu/main-menu.component';
 const routes: Routes = [
   {
     path: 'lobby',
-    loadChildren: './app/lobby/lobby.module#LobbyModule'
+    loadChildren: './lobby/lobby.module#LobbyModule',
   },
   {
     path: 'statistics',
-    loadChildren: './app/statistics/statistics.module#StatisticsModule'
+    loadChildren: './statistics/statistics.module#StatisticsModule',
   },
   {
     path: '',

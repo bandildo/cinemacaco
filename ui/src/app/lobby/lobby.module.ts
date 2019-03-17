@@ -1,3 +1,4 @@
+import { VotingButtonsComponent } from './voting-buttons/voting-buttons.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,7 +8,7 @@ import { MacacoComponent } from './macaco/macaco.component';
 import { HumanoComponent } from './humano/humano.component';
 
 @NgModule({
-  declarations: [MacacoComponent, HumanoComponent],
+  declarations: [MacacoComponent, HumanoComponent, VotingButtonsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

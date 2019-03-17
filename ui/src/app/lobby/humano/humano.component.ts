@@ -1,4 +1,4 @@
-import { MacacoVote } from 'src/app/core/voting/macaco-vote.model';
+import { Vote } from 'src/app/core/voting/vote.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HumanoComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {}
 
-  currentGame: MacacoVote;
+  currentGame: Vote;
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(resolvedData => {

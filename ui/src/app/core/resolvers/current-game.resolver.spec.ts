@@ -1,4 +1,4 @@
-import { MacacoVote } from './../voting/macaco-vote.model';
+import { Vote } from '../voting/vote.model';
 import { VotingService } from './../voting/voting.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CoreModule } from './../core.module';
@@ -35,7 +35,7 @@ describe('CurrentGameResolver', () => {
         name: 'test-movie-name',
         thumbsUp: true,
         timestamp
-      } as MacacoVote;
+      } as Vote;
 
       spyOn(votingService, 'getCurrentGame').and.returnValue(of(expectedCurrentGame));
 

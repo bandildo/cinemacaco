@@ -1,4 +1,5 @@
-<p>
-  humano works!
+<label>
+  Current Game:
   {{ currentGame.name }}
-</p>
+</label>
+<app-voting-buttons [isMacaco]="false" [gameName]="currentGame.name"></app-voting-buttons>

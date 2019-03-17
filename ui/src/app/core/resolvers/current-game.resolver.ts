@@ -1,14 +1,14 @@
 import { VotingService } from './../voting/voting.service';
 import { EMPTY, Observable, of } from 'rxjs';
-import { MacacoVote } from './../voting/macaco-vote.model';
+import { Vote } from '../voting/vote.model';
 import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class CurrentGameResolver implements Resolve<MacacoVote> {
+export class CurrentGameResolver implements Resolve<Vote> {
   constructor(private votingService: VotingService) {}
 
-  resolve(): Observable<MacacoVote> {
+  resolve(): Observable<Vote> {
     return this.votingService.getCurrentGame();
   }
 }

@@ -6,11 +6,10 @@ import {
 import { async, TestBed, inject } from '@angular/core/testing';
 import { CoreModule } from '../core.module';
 import VoteUtils from 'src/app/utils/vote.utils';
-import { MacacoVote } from './macaco-vote.model';
+import { Vote } from './vote.model';
 
 describe('Voting Service', () => {
   let service: VotingService;
-
   let httpMock: HttpTestingController;
 
   beforeEach(async(() => {
@@ -33,8 +32,8 @@ describe('Voting Service', () => {
 
       jasmine.clock().mockDate(expectedVote.timestamp);
 
-      service.castMacacoVote(name, true).subscribe(
-        (coposVote: MacacoVote) => {
+      service.castVote(name, true, true).subscribe(
+        (coposVote: Vote) => {
           expect(coposVote).toEqual(expectedVote);
         },
         error => fail(error)

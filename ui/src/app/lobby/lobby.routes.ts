@@ -1,3 +1,4 @@
+import { CurrentGameResolver } from './../core/resolvers/current-game.resolver';
 import { MacacoComponent } from './macaco/macaco.component';
 import { HumanoComponent } from './humano/humano.component';
 
@@ -8,6 +9,7 @@ export const lobbyRoutes = [
   },
   {
     path: 'humano',
-    component: HumanoComponent
+    component: HumanoComponent,
+    resolve: { currentGame: CurrentGameResolver }
   }
 ];

@@ -7,14 +7,12 @@ import { VotingService } from 'src/app/core/voting/voting.service';
   templateUrl: './macaco.component.html',
   styleUrls: ['./macaco.component.css']
 })
-
 export class MacacoComponent {
   name = new FormControl('');
 
   vote: MacacoVote;
 
-  constructor(private votingService: VotingService) {
-  }
+  constructor(private votingService: VotingService) {}
 
   onVote(thumbsUp: boolean) {
     this.votingService.castMacacoVote(this.name.value, thumbsUp).subscribe();

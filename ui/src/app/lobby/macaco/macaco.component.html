@@ -1,15 +1,15 @@
 <label>
   Game:
-  <input id="gameNameInput"
-         type="text"
-         [formControl]="name"
-         placeholder="e.g. Inception">
+  <input
+    id="gameNameInput"
+    type="text"
+    [formControl]="name"
+    placeholder="e.g. Inception"
+  />
 </label>
-<button class="btn btn-yes"
-        (click)="onVote(true)">
-          SIM
+<button class="btn btn-yes" (click)="onVote(true)">
+  SIM
 </button>
-<button class="btn btn-no"
-        (click)="onVote(false)">
-          NÃO
+<button class="btn btn-no" (click)="onVote(false)">
+  NÃO
 </button>

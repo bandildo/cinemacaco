@@ -4,6 +4,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './humano.component.html',
   styleUrls: ['./humano.component.css']
 })
-
-export class HumanoComponent {
-}
+export class HumanoComponent {}

@@ -1,62 +1,57 @@
-import { VotingService } from "./voting.service";
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { VotingService } from './voting.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from '@angular/common/http/testing';
 import { async, TestBed, inject } from '@angular/core/testing';
 import { CoreModule } from '../core.module';
 import { MacacoVote } from './macaco-vote.model';
 
 describe('Voting Service', () => {
-    let service: VotingService;
-  
-    let httpMock: HttpTestingController;
-  
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                CoreModule,
-            ],
-        })
-        .compileComponents();
-      }));
+  let service: VotingService;
 
-    beforeEach(inject(
-        [
-            HttpTestingController,
-            VotingService
-        ],
-        (
-            httpTestingController,
-            injectedVotingService,
-        ) => {
-        httpMock = httpTestingController;
-        service = injectedVotingService;
-    }));
+  let httpMock: HttpTestingController;
 
-    describe('UPDATE', () => {
-        it('should post a Macaco vote', () => {
-            const name = "test-movie-name";
-            const timestamp = new Date();
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, CoreModule]
+    }).compileComponents();
+  }));
 
-            const expectedVote = {
-              name,
-              thumbsUp: true,
-              timestamp
-            } as MacacoVote;
+  beforeEach(inject(
+    [HttpTestingController, VotingService],
+    (httpTestingController, injectedVotingService) => {
+      httpMock = httpTestingController;
+      service = injectedVotingService;
+    }
+  ));
 
-            jasmine.clock().mockDate(timestamp);
-            
-            service.castMacacoVote(name, true).subscribe(
-                (coposVote: MacacoVote) => {
-                    expect(coposVote).toEqual(expectedVote);
-                },
-                error => fail(error)
-            );
+  describe('UPDATE', () => {
+    it('should post a Macaco vote', () => {
+      const name = 'test-movie-name';
+      const timestamp = new Date();
 
-            const call = httpMock.expectOne('https://cinemacaco-app.firebaseio.com/currentGame.json');
-            expect(call.request.method).toEqual('PUT');
+      const expectedVote = {
+        name,
+        thumbsUp: true,
+        timestamp
+      } as MacacoVote;
 
-            call.flush(expectedVote);
-        });
+      jasmine.clock().mockDate(timestamp);
+
+      service.castMacacoVote(name, true).subscribe(
+        (coposVote: MacacoVote) => {
+          expect(coposVote).toEqual(expectedVote);
+        },
+        error => fail(error)
+      );
+
+      const call = httpMock.expectOne(
+        'https://cinemacaco-app.firebaseio.com/currentGame.json'
+      );
+      expect(call.request.method).toEqual('PUT');
+
+      call.flush(expectedVote);
     });
-    
+  });
 });

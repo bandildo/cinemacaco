@@ -5,20 +5,20 @@ import { MainMenuComponent } from './core/main-menu/main-menu.component';
 const routes: Routes = [
   {
     path: 'lobby',
-    loadChildren: './app/lobby/lobby.module#LobbyModule',
+    loadChildren: './app/lobby/lobby.module#LobbyModule'
   },
   {
     path: 'statistics',
-    loadChildren: './app/statistics/statistics.module#StatisticsModule',
+    loadChildren: './app/statistics/statistics.module#StatisticsModule'
   },
   {
     path: '',
     component: MainMenuComponent
-  },
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

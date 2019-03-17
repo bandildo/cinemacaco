@@ -8,17 +8,15 @@ import { LobbyModule } from './lobby/lobby.module';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
     CoreModule,
     LobbyModule,
-    StatisticsModule,
+    StatisticsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

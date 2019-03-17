@@ -1,15 +1,15 @@
 h1 {
-    font-size: 80px;
-    font-weight: 800;
+  font-size: 80px;
+  font-weight: 800;
 }
 
 .main-menu-button {
-    display: inline-block;
-    font-size: 64px;
-    height:20vh;
-    width:75vw;
+  display: inline-block;
+  font-size: 64px;
+  height: 20vh;
+  width: 75vw;
 }
 
 .main-menu-button + .main-menu-button {
-    margin-top: 5vh;
+  margin-top: 5vh;
 }

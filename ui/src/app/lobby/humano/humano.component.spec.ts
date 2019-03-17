@@ -7,9 +7,8 @@ describe('HumanoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HumanoComponent ]
-    })
-    .compileComponents();
+      declarations: [HumanoComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

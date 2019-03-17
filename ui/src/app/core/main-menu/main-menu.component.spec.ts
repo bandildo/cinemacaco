@@ -1,4 +1,9 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  inject
+} from '@angular/core/testing';
 
 import { MainMenuComponent } from './main-menu.component';
 import { By } from '@angular/platform-browser';
@@ -13,22 +18,14 @@ describe('MainMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainMenuComponent ],
-      imports: [ RouterTestingModule ]
-    })
-    .compileComponents();
+      declarations: [MainMenuComponent],
+      imports: [RouterTestingModule]
+    }).compileComponents();
   }));
 
-  beforeEach(inject(
-    [
-      Router,
-    ],
-    (
-      injectedRouter,
-    ) => {
-      router = injectedRouter;
-    }
-  ));
+  beforeEach(inject([Router], injectedRouter => {
+    router = injectedRouter;
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MainMenuComponent);
@@ -42,10 +39,15 @@ describe('MainMenuComponent', () => {
 
   describe('Macaco button', () => {
     it('should exist', () => {
-      expect(fixture.debugElement.query(By.css('button#macacoButton.btn'))).not.toBeNull();
-      expect(fixture.debugElement.query(By.css('button#macacoButton.btn')).nativeElement.innerText).toContain('Macaco');
+      expect(
+        fixture.debugElement.query(By.css('button#macacoButton.btn'))
+      ).not.toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('button#macacoButton.btn'))
+          .nativeElement.innerText
+      ).toContain('Macaco');
     });
-    
+
     it('should redirect to Macaco page', () => {
       spyOn(router, 'navigate');
       component.onMacacoClick();
@@ -55,8 +57,13 @@ describe('MainMenuComponent', () => {
 
   describe('Humano button', () => {
     it('should exist', () => {
-      expect(fixture.debugElement.query(By.css('button#humanoButton.btn'))).not.toBeNull();
-      expect(fixture.debugElement.query(By.css('button#humanoButton.btn')).nativeElement.innerText).toContain('Humano');
+      expect(
+        fixture.debugElement.query(By.css('button#humanoButton.btn'))
+      ).not.toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('button#humanoButton.btn'))
+          .nativeElement.innerText
+      ).toContain('Humano');
     });
 
     it('should redirect to Humano page', () => {
@@ -68,8 +75,13 @@ describe('MainMenuComponent', () => {
 
   describe('Results button', () => {
     it('should have a Results button', () => {
-      expect(fixture.debugElement.query(By.css('button#resultsButton.btn'))).not.toBeNull();
-      expect(fixture.debugElement.query(By.css('button#resultsButton.btn')).nativeElement.innerText).toContain('Results');
+      expect(
+        fixture.debugElement.query(By.css('button#resultsButton.btn'))
+      ).not.toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('button#resultsButton.btn'))
+          .nativeElement.innerText
+      ).toContain('Results');
     });
 
     it('should redirect to Results page', () => {

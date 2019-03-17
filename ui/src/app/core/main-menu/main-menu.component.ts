@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.css']
 })
-export class MainMenuComponent {  
-  constructor(private router: Router) { }
-  
+export class MainMenuComponent {
+  constructor(private router: Router) {}
+
   onResultsClick() {
     this.router.navigate(['results']);
   }

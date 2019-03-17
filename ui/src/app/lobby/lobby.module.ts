@@ -7,14 +7,11 @@ import { MacacoComponent } from './macaco/macaco.component';
 import { HumanoComponent } from './humano/humano.component';
 
 @NgModule({
-  declarations: [
-    MacacoComponent,
-    HumanoComponent
-  ],
+  declarations: [MacacoComponent, HumanoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(lobbyRoutes)
   ]
 })
-export class LobbyModule { }
+export class LobbyModule {}

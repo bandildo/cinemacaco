@@ -5,12 +5,7 @@ import { RouterModule } from '@angular/router';
 import { statisticsRoutes } from './statistics.routes';
 
 @NgModule({
-  declarations: [
-    ResultsComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(statisticsRoutes),
-  ]
+  declarations: [ResultsComponent],
+  imports: [CommonModule, RouterModule.forChild(statisticsRoutes)]
 })
-export class StatisticsModule { }
+export class StatisticsModule {}

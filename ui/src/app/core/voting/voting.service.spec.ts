@@ -28,13 +28,13 @@ describe('Voting Service', () => {
 
   describe('UPDATE', () => {
     it('should post a Macaco vote', () => {
-      const expectedVote = VoteUtils.getTestMacacoVote();
+      const expectedVote = VoteUtils.getTestVote();
 
       jasmine.clock().mockDate(expectedVote.timestamp);
 
-      service.castVote(name, true, true).subscribe(
-        (coposVote: Vote) => {
-          expect(coposVote).toEqual(expectedVote);
+      service.castMacacoVote(name, true).subscribe(
+        (vote: Vote) => {
+          expect(vote).toEqual(expectedVote);
         },
         error => fail(error)
       );
@@ -46,11 +46,31 @@ describe('Voting Service', () => {
 
       call.flush(expectedVote);
     });
+
+    it('should post a Human vote', () => {
+      const expectedVote = VoteUtils.getTestVote();
+
+      jasmine.clock().mockDate(expectedVote.timestamp);
+
+      service.castVote(name, true).subscribe(
+        (vote: Vote) => {
+          expect(vote).toEqual(expectedVote);
+        },
+        error => fail(error)
+      );
+
+      const call = httpMock.expectOne(
+        'https://cinemacaco-app.firebaseio.com/currentVotes.json'
+      );
+      expect(call.request.method).toEqual('POST');
+
+      call.flush(expectedVote);
+    });
   });
 
   describe('GET', () => {
     it('should get the current game', () => {
-      const expectedCurrentGame = VoteUtils.getTestMacacoVote();
+      const expectedCurrentGame = VoteUtils.getTestVote();
 
       service.getCurrentGame().subscribe(currentGame => {
         expect(currentGame).toEqual(expectedCurrentGame);

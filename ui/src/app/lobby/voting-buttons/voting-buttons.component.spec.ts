@@ -49,7 +49,7 @@ describe('VotingButtonsComponent', () => {
       it('should cast positive MacacoVote when clicking', () => {
         const name = 'test-movie-name';
         component.gameName = name;
-        component.isMacaco = true;
+        component.isMacaco = false;
 
         spyOn(votingService, 'castVote').and.returnValue(of({}));
 
@@ -57,7 +57,7 @@ describe('VotingButtonsComponent', () => {
           .query(By.css('button.btn-yes'))
           .nativeElement.click();
 
-        expect(votingService.castVote).toHaveBeenCalledWith(name, true, true);
+        expect(votingService.castVote).toHaveBeenCalledWith(name, true);
       });
     });
 
@@ -68,10 +68,10 @@ describe('VotingButtonsComponent', () => {
         ).not.toBeNull();
       });
 
-      it('should generate a negative MacacoVote when clicking the button', () => {
+      it('should generate a negative vote when clicking the button', () => {
         const name = 'test-movie-name';
         component.gameName = name;
-        component.isMacaco = true;
+        component.isMacaco = false;
 
         spyOn(votingService, 'castVote').and.returnValue(of({}));
 
@@ -79,7 +79,7 @@ describe('VotingButtonsComponent', () => {
           .query(By.css('button.btn-no'))
           .nativeElement.click();
 
-        expect(votingService.castVote).toHaveBeenCalledWith(name, false, true);
+        expect(votingService.castVote).toHaveBeenCalledWith(name, false);
       });
     });
   });

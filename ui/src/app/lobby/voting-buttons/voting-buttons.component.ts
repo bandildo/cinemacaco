@@ -16,8 +16,10 @@ export class VotingButtonsComponent {
   public gameName: string;
 
   onVote(thumbsUp: boolean) {
-    this.votingService
-      .castVote(this.gameName, thumbsUp, this.isMacaco)
-      .subscribe();
+    if (this.isMacaco) {
+      this.votingService.castMacacoVote(this.gameName, thumbsUp).subscribe();
+    } else {
+      this.votingService.castVote(this.gameName, thumbsUp).subscribe();
+    }
   }
 }

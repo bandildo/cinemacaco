@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed, inject } from '@angular/core/testing';
 import { CoreModule } from '../core.module';
+import VoteUtils from 'src/app/utils/vote.utils';
 import { MacacoVote } from './macaco-vote.model';
 
 describe('Voting Service', () => {
@@ -28,16 +29,9 @@ describe('Voting Service', () => {
 
   describe('UPDATE', () => {
     it('should post a Macaco vote', () => {
-      const name = 'test-movie-name';
-      const timestamp = new Date();
+      const expectedVote = VoteUtils.getTestMacacoVote();
 
-      const expectedVote = {
-        name,
-        thumbsUp: true,
-        timestamp
-      } as MacacoVote;
-
-      jasmine.clock().mockDate(timestamp);
+      jasmine.clock().mockDate(expectedVote.timestamp);
 
       service.castMacacoVote(name, true).subscribe(
         (coposVote: MacacoVote) => {
@@ -52,6 +46,22 @@ describe('Voting Service', () => {
       expect(call.request.method).toEqual('PUT');
 
       call.flush(expectedVote);
+    });
+  });
+
+  describe('GET', () => {
+    it('should get the current game', () => {
+      const expectedCurrentGame = VoteUtils.getTestMacacoVote();
+
+      service.getCurrentGame().subscribe(currentGame => {
+        expect(currentGame).toEqual(expectedCurrentGame);
+      });
+
+      const call = httpMock.expectOne(
+        'https://cinemacaco-app.firebaseio.com/currentGame.json'
+      );
+      expect(call.request.method).toEqual('GET');
+      call.flush(expectedCurrentGame);
     });
   });
 });

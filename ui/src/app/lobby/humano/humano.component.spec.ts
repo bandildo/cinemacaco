@@ -20,4 +20,6 @@ describe('HumanoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
 });

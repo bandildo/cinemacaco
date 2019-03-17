@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MacacoVote } from './macaco-vote.model';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, of } from 'rxjs';
 
 @Injectable()
 export class VotingService {
@@ -18,5 +18,9 @@ export class VotingService {
       'https://cinemacaco-app.firebaseio.com/currentGame.json',
       coposVote
     ) as Observable<MacacoVote>;
+  }
+
+  getCurrentGame(): Observable<MacacoVote> {
+    return this.http.get('https://cinemacaco-app.firebaseio.com/currentGame.json') as Observable<MacacoVote>;
   }
 }

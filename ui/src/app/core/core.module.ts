@@ -2,7 +2,7 @@ import { CurrentGameResolver } from './resolvers/current-game.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainMenuComponent } from './main-menu/main-menu.component';
-import { VotingService } from './voting/voting.service';
+import { GameService } from './game/game.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -14,8 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [
-    VotingService,
+    GameService,
     CurrentGameResolver
+  
   ]
 })
 export class CoreModule { }

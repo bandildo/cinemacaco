@@ -1,5 +1,4 @@
 export interface Vote {
-  name: string;
-  timestamp: Date;
+  id: string;
   thumbsUp: boolean;
 }

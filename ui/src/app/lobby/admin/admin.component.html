@@ -1,0 +1,10 @@
+<label>
+  Game:
+  <input
+    id="gameNameInput"
+    type="text"
+    [formControl]="name"
+    placeholder="e.g. Inception"
+  />
+</label>
+<button class="btn btn-primary" data-action="game:start" (click)="startGame()">START GAME</button>

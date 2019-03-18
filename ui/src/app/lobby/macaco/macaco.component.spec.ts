@@ -7,7 +7,6 @@ import {
 } from '@angular/core/testing';
 
 import { MacacoComponent } from './macaco.component';
-import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('MacacoComponent', () => {
@@ -24,13 +23,5 @@ describe('MacacoComponent', () => {
     fixture = TestBed.createComponent(MacacoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  describe('Game name input text field', () => {
-    it('should exist', () => {
-      expect(
-        fixture.debugElement.query(By.css('#gameNameInput'))
-      ).not.toBeNull();
-    });
   });
 });

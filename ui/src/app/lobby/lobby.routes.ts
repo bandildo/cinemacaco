@@ -1,11 +1,17 @@
+import { AdminComponent } from './admin/admin.component';
 import { CurrentGameResolver } from './../core/resolvers/current-game.resolver';
 import { MacacoComponent } from './macaco/macaco.component';
 import { HumanoComponent } from './humano/humano.component';
 
 export const lobbyRoutes = [
   {
+    path: 'admin',
+    component: AdminComponent
+  },
+  {
     path: 'macaco',
-    component: MacacoComponent
+    component: MacacoComponent,
+    resolve: { currentGame: CurrentGameResolver }
   },
   {
     path: 'humano',

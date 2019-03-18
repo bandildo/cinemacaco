@@ -6,9 +6,15 @@ import { RouterModule } from '@angular/router';
 import { lobbyRoutes } from './lobby.routes';
 import { MacacoComponent } from './macaco/macaco.component';
 import { HumanoComponent } from './humano/humano.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
-  declarations: [MacacoComponent, HumanoComponent, VotingButtonsComponent],
+  declarations: [
+    AdminComponent,
+    HumanoComponent,
+    MacacoComponent,
+    VotingButtonsComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

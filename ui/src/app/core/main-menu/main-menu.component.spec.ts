@@ -73,6 +73,24 @@ describe('MainMenuComponent', () => {
     });
   });
 
+  describe('Admin button', () => {
+    it('should have an Admin button', () => {
+      expect(
+        fixture.debugElement.query(By.css('button#adminButton.btn'))
+      ).not.toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('button#adminButton.btn'))
+          .nativeElement.innerText
+      ).toContain('Admin');
+    });
+
+    it('should redirect to Admin page', () => {
+      spyOn(router, 'navigate');
+      component.onAdminClick();
+      expect(router.navigate).toHaveBeenCalledWith(['admin']);
+    });
+  });
+
   describe('Results button', () => {
     it('should have a Results button', () => {
       expect(

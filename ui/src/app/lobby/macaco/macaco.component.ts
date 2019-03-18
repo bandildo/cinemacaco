@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Game } from 'src/app/core/game/game.model';
 
 @Component({
   templateUrl: './macaco.component.html',
   styleUrls: ['./macaco.component.css']
 })
 export class MacacoComponent {
-  name = new FormControl('');
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  currentGame: Game;
+
+  ngOnInit() {
+    this.activatedRoute.data.subscribe(resolvedData => {
+      this.currentGame = resolvedData.currentGame;
+    });
+  }
 }

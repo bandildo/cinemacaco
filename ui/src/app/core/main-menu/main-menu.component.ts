@@ -20,4 +20,8 @@ export class MainMenuComponent {
   onMacacoClick() {
     this.router.navigate(['macaco']);
   }
+
+  onAdminClick() {
+    this.router.navigate(['admin']);
+  }
 }

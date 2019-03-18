@@ -16,4 +16,10 @@ export class AdminComponent {
   startGame() {
     this.gameService.startGame(UUID(), this.name.value, new Date()).subscribe();
   }
+
+  endGame() {
+    this.gameService.deleteCurrentGame().subscribe();
+    this.gameService.deleteCurrentHumanVotes().subscribe();
+    this.gameService.deleteCurrentMacacoVote().subscribe();
+  }
 }

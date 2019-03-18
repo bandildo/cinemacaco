@@ -55,7 +55,7 @@ describe('AdminComponent', () => {
       ).not.toBeNull();
     });
 
-    it('should ask voting service to start a game', () => {
+    it('should ask game service to start a game', () => {
       const game = GameUtils.getTestGame();
 
       component.name.setValue(game.name);
@@ -70,4 +70,21 @@ describe('AdminComponent', () => {
       expect(gameService.startGame).toHaveBeenCalledWith(jasmine.any(String), game.name, game.timestamp);
     });
   });
+
+  describe('End game button', () => {
+    it('should ask game service to end the game', () => {
+      spyOn(gameService, 'deleteCurrentGame').and.returnValue(of({}));
+      spyOn(gameService, 'deleteCurrentHumanVotes').and.returnValue(of({}));
+      spyOn(gameService, 'deleteCurrentMacacoVote').and.returnValue(of({}));
+
+      fixture.debugElement
+        .query(By.css('button[data-action="game:end"]'))
+        .nativeElement.click();
+
+      expect(gameService.deleteCurrentGame).toHaveBeenCalled();
+      expect(gameService.deleteCurrentHumanVotes).toHaveBeenCalled();
+      expect(gameService.deleteCurrentMacacoVote).toHaveBeenCalled();
+    });
+  });
+  
 });

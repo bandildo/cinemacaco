@@ -34,12 +34,14 @@ describe('Game Service', () => {
 
       jasmine.clock().mockDate(expectedGame.timestamp);
 
-      service.startGame(expectedGame.id, expectedGame.name, expectedGame.timestamp).subscribe(
-        (game: Game) => {
-          expect(game).toEqual(expectedGame);
-        },
-        error => fail(error)
-      );
+      service
+        .startGame(expectedGame.id, expectedGame.name, expectedGame.timestamp)
+        .subscribe(
+          (game: Game) => {
+            expect(game).toEqual(expectedGame);
+          },
+          error => fail(error)
+        );
 
       const call = httpMock.expectOne(
         'https://cinemacaco-app.firebaseio.com/currentGame.json'
@@ -51,8 +53,6 @@ describe('Game Service', () => {
 
     it('should put a Macaco vote', () => {
       const expectedVote = VoteUtils.getTestVote();
-
-      jasmine.clock().mockDate(expectedVote.timestamp);
 
       service.castMacacoVote(name, true).subscribe(
         (vote: Vote) => {
@@ -73,8 +73,6 @@ describe('Game Service', () => {
   describe('POST', () => {
     it('should post a Human vote', () => {
       const expectedVote = VoteUtils.getTestVote();
-
-      jasmine.clock().mockDate(expectedVote.timestamp);
 
       service.castHumanVote(name, true).subscribe(
         (vote: Vote) => {
@@ -105,6 +103,35 @@ describe('Game Service', () => {
       );
       expect(call.request.method).toEqual('GET');
       call.flush(expectedCurrentGame);
+    });
+  });
+
+  describe('DELETE', () => {
+    it('Should delete current game', () => {
+      service.deleteCurrentGame().subscribe();
+
+      const call = httpMock.expectOne(
+        'https://cinemacaco-app.firebaseio.com/currentGame.json'
+      );
+      expect(call.request.method).toEqual('DELETE');
+    });
+
+    it('Should delete current macaco vote', () => {
+      service.deleteCurrentMacacoVote().subscribe();
+
+      const call = httpMock.expectOne(
+        'https://cinemacaco-app.firebaseio.com/currentMacacoVote.json'
+      );
+      expect(call.request.method).toEqual('DELETE');
+    });
+
+    it('Should delete current human votes', () => {
+      service.deleteCurrentHumanVotes().subscribe();
+
+      const call = httpMock.expectOne(
+        'https://cinemacaco-app.firebaseio.com/currentHumanVotes.json'
+      );
+      expect(call.request.method).toEqual('DELETE');
     });
   });
 });

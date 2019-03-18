@@ -6,6 +6,7 @@ import { Game } from './game.model';
 
 @Injectable()
 export class GameService {
+  
   constructor(private http: HttpClient) {}
 
   getCurrentGame(): Observable<Game> {
@@ -49,5 +50,23 @@ export class GameService {
       'https://cinemacaco-app.firebaseio.com/currentHumanVotes.json',
       coposVote
     ) as Observable<Vote>;
+  }
+
+  deleteCurrentGame(): Observable<any> {
+    return this.http.delete(
+      'https://cinemacaco-app.firebaseio.com/currentGame.json'
+    ) as Observable<any>;
+  }
+
+  deleteCurrentMacacoVote(): Observable<any> {
+    return this.http.delete(
+      'https://cinemacaco-app.firebaseio.com/currentMacacoVote.json'
+    ) as Observable<any>;
+  }
+
+  deleteCurrentHumanVotes(): Observable<any> {
+    return this.http.delete(
+      'https://cinemacaco-app.firebaseio.com/currentHumanVotes.json'
+    ) as Observable<any>;
   }
 }

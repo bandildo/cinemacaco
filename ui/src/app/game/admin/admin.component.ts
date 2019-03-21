@@ -1,7 +1,7 @@
-import { GameService } from 'src/app/core/game/game.service';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { v4 as UUID } from 'uuid';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-admin',

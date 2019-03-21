@@ -1,5 +1,5 @@
 import { CoreModule } from 'src/app/core/core.module';
-import { GameService } from 'src/app/core/game/game.service';
+import { GameService } from 'src/app/game/services/game.service';
 import {
   async,
   ComponentFixture,

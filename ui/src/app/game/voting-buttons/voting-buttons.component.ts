@@ -1,5 +1,5 @@
-import { GameService } from 'src/app/core/game/game.service';
 import { Component, Input } from '@angular/core';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-voting-buttons',
@@ -12,14 +12,14 @@ export class VotingButtonsComponent {
   @Input()
   public isMacaco: boolean;
 
-  @Input()
-  public gameId: string;
+  // @Input()
+  // public gameId: string;
 
   onVote(thumbsUp: boolean) {
     if (this.isMacaco) {
-      this.gameService.castMacacoVote(this.gameId, thumbsUp).subscribe();
+      this.gameService.castMacacoVote(thumbsUp).subscribe();
     } else {
-      this.gameService.castHumanVote(this.gameId, thumbsUp).subscribe();
+      this.gameService.castHumanVote(thumbsUp).subscribe();
     }
   }
 }

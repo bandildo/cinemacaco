@@ -3,9 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StatisticsModule } from './statistics/statistics.module';
-import { LobbyModule } from './lobby/lobby.module';
 import { CoreModule } from './core/core.module';
+import { GameModule } from './game/game.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,8 +12,7 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     BrowserModule,
     CoreModule,
-    LobbyModule,
-    StatisticsModule
+    GameModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { CoreModule } from 'src/app/core/core.module';
-import { GameService } from 'src/app/core/game/game.service';
+import { GameService } from 'src/app/game/services/game.service';
 import {
   async,
   ComponentFixture,
@@ -47,8 +47,8 @@ describe('VotingButtonsComponent', () => {
       });
 
       it('should cast positive macaco vote when clicking as macaco', () => {
-        const gameId = 'game-id';
-        component.gameId = gameId;
+        // const gameId = 'game-id';
+        // component.gameId = gameId;
         component.isMacaco = true;
 
         spyOn(votingService, 'castMacacoVote').and.returnValue(of({}));
@@ -57,12 +57,12 @@ describe('VotingButtonsComponent', () => {
           .query(By.css('button.btn-yes'))
           .nativeElement.click();
 
-        expect(votingService.castMacacoVote).toHaveBeenCalledWith(gameId, true);
+        expect(votingService.castMacacoVote).toHaveBeenCalledWith(true);
       });
 
       it('should cast positive human vote when clicking as human', () => {
-        const gameId = 'game-id';
-        component.gameId = gameId;
+        // const gameId = 'game-id';
+        // component.gameId = gameId;
         component.isMacaco = false;
 
         spyOn(votingService, 'castHumanVote').and.returnValue(of({}));
@@ -71,7 +71,7 @@ describe('VotingButtonsComponent', () => {
           .query(By.css('button.btn-yes'))
           .nativeElement.click();
 
-        expect(votingService.castHumanVote).toHaveBeenCalledWith(gameId, true);
+        expect(votingService.castHumanVote).toHaveBeenCalledWith(true);
       });
     });
 
@@ -83,8 +83,8 @@ describe('VotingButtonsComponent', () => {
       });
 
       it('should generate a negative macaco vote when clicking as macaco', () => {
-        const gameId = 'game-id';
-        component.gameId = gameId;
+        // const gameId = 'game-id';
+        // component.gameId = gameId;
         component.isMacaco = true;
 
         spyOn(votingService, 'castMacacoVote').and.returnValue(of({}));
@@ -93,12 +93,12 @@ describe('VotingButtonsComponent', () => {
           .query(By.css('button.btn-no'))
           .nativeElement.click();
 
-        expect(votingService.castMacacoVote).toHaveBeenCalledWith(gameId, false);
+        expect(votingService.castMacacoVote).toHaveBeenCalledWith(false);
       });
 
       it('should generate a negative human vote when clicking as human', () => {
-        const gameId = 'game-id';
-        component.gameId = gameId;
+        // const gameId = 'game-id';
+        // component.gameId = gameId;
         component.isMacaco = false;
 
         spyOn(votingService, 'castHumanVote').and.returnValue(of({}));
@@ -107,7 +107,7 @@ describe('VotingButtonsComponent', () => {
           .query(By.css('button.btn-no'))
           .nativeElement.click();
 
-        expect(votingService.castHumanVote).toHaveBeenCalledWith(gameId, false);
+        expect(votingService.castHumanVote).toHaveBeenCalledWith(false);
       });
     });
   });

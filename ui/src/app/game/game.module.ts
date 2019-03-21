@@ -3,22 +3,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { lobbyRoutes } from './lobby.routes';
 import { MacacoComponent } from './macaco/macaco.component';
 import { HumanoComponent } from './humano/humano.component';
 import { AdminComponent } from './admin/admin.component';
+import { gameRoutes } from './game.routes';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     HumanoComponent,
     MacacoComponent,
-    VotingButtonsComponent
+    VotingButtonsComponent,
+    MainMenuComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(lobbyRoutes)
+    RouterModule.forChild(gameRoutes)
   ]
 })
-export class LobbyModule {}
+export class GameModule {}

@@ -1,7 +1,7 @@
-import { Vote } from 'src/app/core/voting/vote.model';
+import { Vote } from 'src/app/game/models/vote.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Game } from 'src/app/core/game/game.model';
+import { Game } from 'src/app/game/models/game.model';
 
 @Component({
   templateUrl: './humano.component.html',

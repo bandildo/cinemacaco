@@ -1,14 +1,15 @@
+import { GameFirestore } from './../models/game-firestore.model';
 import { GameService } from './game.service';
 import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed, inject } from '@angular/core/testing';
-import { CoreModule } from '../core.module';
+import { CoreModule } from '../../core/core.module';
 import VoteUtils from 'src/app/utils/vote.utils';
-import { Vote } from '../voting/vote.model';
 import GameUtils from 'src/app/utils/game.utils';
-import { Game } from './game.model';
+import UrlUtils from 'src/app/utils/url.utils';
+import { VoteFirestore } from '../models/vote-firestore.model';
 
 describe('Game Service', () => {
   let service: GameService;
@@ -28,81 +29,87 @@ describe('Game Service', () => {
     }
   ));
 
-  describe('PUT', () => {
-    it('Should put new game', () => {
+  describe('PATCH', () => {
+    it('Should post new game', () => {
       const expectedGame = GameUtils.getTestGame();
+      const expectedGameResponse = GameUtils.toGameFirestore(expectedGame);
 
       jasmine.clock().mockDate(expectedGame.timestamp);
 
       service
         .startGame(expectedGame.id, expectedGame.name, expectedGame.timestamp)
         .subscribe(
-          (game: Game) => {
-            expect(game).toEqual(expectedGame);
+          (response: GameFirestore) => {
+            expect(response).toEqual(expectedGameResponse);
           },
           error => fail(error)
         );
 
       const call = httpMock.expectOne(
-        'https://cinemacaco-app.firebaseio.com/currentGame.json'
+        UrlUtils.generateDbUrl('/activeGame/info')
       );
-      expect(call.request.method).toEqual('PUT');
+      expect(call.request.method).toEqual('PATCH');
 
-      call.flush(expectedGame);
+      call.flush(expectedGameResponse);
     });
-
-    it('should put a Macaco vote', () => {
+    
+    it('should post a Macaco vote', () => {
       const expectedVote = VoteUtils.getTestVote();
+      const expectedVoteResponse = VoteUtils.toVoteFirestore(expectedVote);
 
-      service.castMacacoVote(name, true).subscribe(
-        (vote: Vote) => {
-          expect(vote).toEqual(expectedVote);
+      service.castMacacoVote(true).subscribe(
+        (response: VoteFirestore) => {
+          expect(response).toEqual(expectedVoteResponse);
         },
         error => fail(error)
       );
 
       const call = httpMock.expectOne(
-        'https://cinemacaco-app.firebaseio.com/currentMacacoVote.json'
+        UrlUtils.generateDbUrl('/activeGame/macacoVote')
       );
-      expect(call.request.method).toEqual('PUT');
+      expect(call.request.method).toEqual('PATCH');
 
-      call.flush(expectedVote);
+      call.flush(expectedVoteResponse);
+    });
+
+    it('should patch a Human vote', () => {
+      const expectedVote = VoteUtils.getTestVote();
+      const expectedVoteResponse = VoteUtils.toVoteFirestore(expectedVote);
+
+      service.castHumanVote(true).subscribe(
+        (response: VoteFirestore) => {
+          expect(response).toEqual(expectedVoteResponse);
+        },
+        error => fail(error)
+      );
+
+      const call = httpMock.expectOne(
+        UrlUtils.generateDbUrl('/activeGame/humanVotes')
+      );
+      expect(call.request.method).toEqual('PATCH');
+
+      call.flush(expectedVoteResponse);
     });
   });
 
   describe('POST', () => {
-    it('should post a Human vote', () => {
-      const expectedVote = VoteUtils.getTestVote();
 
-      service.castHumanVote(name, true).subscribe(
-        (vote: Vote) => {
-          expect(vote).toEqual(expectedVote);
-        },
-        error => fail(error)
-      );
-
-      const call = httpMock.expectOne(
-        'https://cinemacaco-app.firebaseio.com/currentHumanVotes.json'
-      );
-      expect(call.request.method).toEqual('POST');
-
-      call.flush(expectedVote);
-    });
   });
 
   describe('GET', () => {
     it('should get the current game', () => {
-      const expectedCurrentGame = GameUtils.getTestGame();
+      const expectedGame = GameUtils.getTestGame();
+      const expectedGameResponse = GameUtils.toGameFirestore(expectedGame);
 
-      service.getCurrentGame().subscribe(currentGame => {
-        expect(currentGame).toEqual(expectedCurrentGame);
+      service.getCurrentGame().subscribe(response => {
+        expect(response).toEqual(expectedGameResponse);
       });
 
       const call = httpMock.expectOne(
-        'https://cinemacaco-app.firebaseio.com/currentGame.json'
+        UrlUtils.generateDbUrl('/activeGame/info')
       );
       expect(call.request.method).toEqual('GET');
-      call.flush(expectedCurrentGame);
+      call.flush(expectedGameResponse);
     });
   });
 
@@ -111,7 +118,7 @@ describe('Game Service', () => {
       service.deleteCurrentGame().subscribe();
 
       const call = httpMock.expectOne(
-        'https://cinemacaco-app.firebaseio.com/currentGame.json'
+        UrlUtils.generateDbUrl('/activeGame/info')
       );
       expect(call.request.method).toEqual('DELETE');
     });
@@ -120,7 +127,7 @@ describe('Game Service', () => {
       service.deleteCurrentMacacoVote().subscribe();
 
       const call = httpMock.expectOne(
-        'https://cinemacaco-app.firebaseio.com/currentMacacoVote.json'
+        UrlUtils.generateDbUrl('/activeGame/macacoVote')
       );
       expect(call.request.method).toEqual('DELETE');
     });
@@ -129,7 +136,7 @@ describe('Game Service', () => {
       service.deleteCurrentHumanVotes().subscribe();
 
       const call = httpMock.expectOne(
-        'https://cinemacaco-app.firebaseio.com/currentHumanVotes.json'
+        UrlUtils.generateDbUrl('/activeGame/humanVotes')
       );
       expect(call.request.method).toEqual('DELETE');
     });

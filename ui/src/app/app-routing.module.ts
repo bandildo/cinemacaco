@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainMenuComponent } from './core/main-menu/main-menu.component';
+import { MainMenuComponent } from './game/main-menu/main-menu.component';
 
 const routes: Routes = [
   {
-    path: 'lobby',
-    loadChildren: './lobby/lobby.module#LobbyModule',
+    path: 'game',
+    loadChildren: './game/game.module#GameModule',
   },
   {
     path: 'statistics',

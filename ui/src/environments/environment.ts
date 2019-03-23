@@ -1,7 +1,21 @@
 export const environment = {
   production: false,
 
-  databaseURL: 'https://firestore.googleapis.com/v1/projects/cinemacaco-app-dev/databases/(default)/documents',
+  databaseURL:
+    'https://firestore.googleapis.com/v1/projects/cinemacaco-app-dev/databases/(default)/documents',
+
+  firebase: {
+    apiKey: 'AIzaSyCtJSWadwot-Q__-KUlmz1VcbjiNElwFZU',
+    authDomain: 'cinemacaco-app-dev.firebaseapp.com',
+    databaseURL: 'https://cinemacaco-app-dev.firebaseio.com',
+    projectId: 'cinemacaco-app-dev',
+    storageBucket: 'cinemacaco-app-dev.appspot.com',
+    messagingSenderId: '501369049289'
+  },
+
+  users: {
+    admin: { id: 'b61811c5-6996-4372-b69e-989330324ec1' }
+  }
 };
 
 // This file can be replaced during build by using the `fileReplacements` array.

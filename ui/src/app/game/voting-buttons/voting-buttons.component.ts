@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GameService } from '../services/game.service';
+import { GameService } from '../../core/services/game/game.service';
 
 @Component({
   selector: 'app-voting-buttons',

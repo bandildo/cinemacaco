@@ -1,4 +1,4 @@
-import { GameService } from '../../game/services/game.service';
+import { GameService } from '../services/game/game.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CoreModule } from './../core.module';
 import { CurrentGameResolver } from './current-game.resolver';

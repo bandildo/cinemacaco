@@ -1,5 +1,5 @@
 import { GameFirestore } from './../../game/models/game-firestore.model';
-import { GameService } from '../../game/services/game.service';
+import { GameService } from '../services/game/game.service';
 import { Observable, of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { Resolve } from '@angular/router';

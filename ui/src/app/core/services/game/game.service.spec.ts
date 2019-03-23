@@ -1,15 +1,16 @@
-import { GameFirestore } from './../models/game-firestore.model';
+import { GameFirestore } from '../../../game/models/game-firestore.model';
 import { GameService } from './game.service';
 import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed, inject } from '@angular/core/testing';
-import { CoreModule } from '../../core/core.module';
+import { CoreModule } from '../../core.module';
 import VoteUtils from 'src/app/utils/vote.utils';
 import GameUtils from 'src/app/utils/game.utils';
 import UrlUtils from 'src/app/utils/url.utils';
-import { VoteFirestore } from '../models/vote-firestore.model';
+import { VoteFirestore } from '../../../game/models/vote-firestore.model';
+import { FirebaseStubsModule } from 'src/app/firebase-stubs/firebase-stubs.module';
 
 describe('Game Service', () => {
   let service: GameService;
@@ -17,7 +18,7 @@ describe('Game Service', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, CoreModule]
+      imports: [HttpClientTestingModule, CoreModule, FirebaseStubsModule],
     }).compileComponents();
   }));
 

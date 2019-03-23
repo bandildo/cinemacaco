@@ -1,13 +1,13 @@
-import { VoteFirestore } from './../models/vote-firestore.model';
-import { GameFirestore } from './../models/game-firestore.model';
+import { VoteFirestore } from '../../../game/models/vote-firestore.model';
+import { GameFirestore } from '../../../game/models/game-firestore.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import GameUtils from 'src/app/utils/game.utils';
 import UrlUtils from 'src/app/utils/url.utils';
 import VoteUtils from 'src/app/utils/vote.utils';
-import { Game } from '../models/game.model';
-import { Vote } from '../models/vote.model';
+import { Game } from '../../../game/models/game.model';
+import { Vote } from '../../../game/models/vote.model';
 
 @Injectable()
 export class GameService {

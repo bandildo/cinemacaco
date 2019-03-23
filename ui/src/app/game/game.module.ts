@@ -8,11 +8,15 @@ import { HumanoComponent } from './humano/humano.component';
 import { AdminComponent } from './admin/admin.component';
 import { gameRoutes } from './game.routes';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { GameService } from '../core/services/game/game.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     HumanoComponent,
+    LoginComponent,
     MacacoComponent,
     VotingButtonsComponent,
     MainMenuComponent,
@@ -20,7 +24,8 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(gameRoutes)
+    RouterModule.forChild(gameRoutes),
+    AngularFireAuthModule
   ]
 })
 export class GameModule {}

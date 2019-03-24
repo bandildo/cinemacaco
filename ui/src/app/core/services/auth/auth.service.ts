@@ -19,6 +19,10 @@ export class AuthService {
     return this.user.pipe(map(user => user.admin));
   }
 
+  isAuthenticated(): Observable<boolean> {
+    return this.user.pipe(map(user => !!(user.uid) ));
+  }
+
   googleLogin(): any {
     this.login(new firebase.auth.GoogleAuthProvider());
   }
@@ -27,8 +31,7 @@ export class AuthService {
     from(this.fireAuth.auth.signInWithPopup(provider)).subscribe(credential => {
       const user = {
         uid: credential.user.uid,
-        email: credential.user.email,
-        admin: false
+        email: credential.user.email
       } as User;
 
       this.user = of(user);

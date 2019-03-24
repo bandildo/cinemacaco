@@ -45,6 +45,21 @@ describe('Auth Service', () => {
     });
   });
 
+  describe('is authenticated', () => {
+    it('Should return true if user is authenticated', () => {
+      service.user = of({uid: 'user-uid'} as User);
+
+      service.isAuthenticated().subscribe(authenticated => expect(authenticated).toBeTruthy());
+    });
+
+    it('Should return false if user is NOT authenticated', () => {
+      service.user = of({} as User);
+
+      service.isAuthenticated().subscribe(authenticated => expect(authenticated).toBeFalsy());
+    });
+
+  });
+
   it('should log in with google', () => {
     const expectedUser = { uid: 'user-uid', email: 'user@test.com' };
 
@@ -62,8 +77,6 @@ describe('Auth Service', () => {
       expect(user.uid).toEqual(expectedUser.uid);
     });
 
-    expect(userService.updateUser).toHaveBeenCalledWith(
-      Object.assign(expectedUser, { admin: false })
-    );
+    expect(userService.updateUser).toHaveBeenCalledWith(expectedUser);
   });
 });

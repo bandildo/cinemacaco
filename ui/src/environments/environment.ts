@@ -11,10 +11,6 @@ export const environment = {
     projectId: 'cinemacaco-app-dev',
     storageBucket: 'cinemacaco-app-dev.appspot.com',
     messagingSenderId: '501369049289'
-  },
-
-  users: {
-    admin: { id: 'b61811c5-6996-4372-b69e-989330324ec1' }
   }
 };
 

@@ -28,12 +28,12 @@ describe('User Service', () => {
     }
   ));
 
-  describe('PATCH', () => {
-    it('Should update user', () => {
+  describe('POST', () => {
+    it('Should create new user', () => {
       const expectedUser = UserUtils.getTestUser();
       const expectedUserResponse = UserUtils.toUserFirestore(expectedUser);
 
-      service.updateUser(expectedUser).subscribe(
+      service.createUser(expectedUser).subscribe(
         (response: UserFirestore) => {
           expect(response).toEqual(expectedUserResponse);
         },
@@ -41,9 +41,27 @@ describe('User Service', () => {
       );
 
       const call = httpMock.expectOne(
+        UrlUtils.generateDbUrl(`/users?documentId=${expectedUser.uid}`)
+      );
+      expect(call.request.method).toEqual('POST');
+
+      call.flush(expectedUserResponse);
+    });
+  });
+
+  describe('GET', () => {
+    it('should get logged in user', () => {
+      const expectedUser = UserUtils.getTestUser();
+      const expectedUserResponse = UserUtils.toUserFirestore(expectedUser);
+
+      service.getUser(expectedUser.uid).subscribe((response) => {
+        expect(response).toEqual(expectedUserResponse);
+      });
+
+      const call = httpMock.expectOne(
         UrlUtils.generateDbUrl(`/users/${expectedUser.uid}`)
       );
-      expect(call.request.method).toEqual('PATCH');
+      expect(call.request.method).toEqual('GET');
 
       call.flush(expectedUserResponse);
     });

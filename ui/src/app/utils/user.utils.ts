@@ -18,6 +18,14 @@ export default class UserUtils {
     };
   }
 
+  static toUser(user: UserFirestore) {
+    return {
+      uid: user.fields.uid.stringValue,
+      email: user.fields.email.stringValue,
+      admin: user.fields.admin.booleanValue
+    };
+  }
+
   static getTestUser(): User {
     return {
       uid: 'user-uid',

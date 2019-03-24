@@ -3,14 +3,18 @@ import { AuthService } from './auth.service';
 import { CoreModule } from '../../core.module';
 import { FirebaseStubsModule } from 'src/app/firebase-stubs/firebase-stubs.module';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { User } from '../../models/user.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import UserUtils from 'src/app/utils/user.utils';
 
 describe('Auth Service', () => {
   let service: AuthService;
   let fireAuth: AngularFireAuth;
   let userService: UserService;
+
+  let expectedUser: User;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -47,36 +51,65 @@ describe('Auth Service', () => {
 
   describe('is authenticated', () => {
     it('Should return true if user is authenticated', () => {
-      service.user = of({uid: 'user-uid'} as User);
+      service.user = of({ uid: 'user-uid' } as User);
 
-      service.isAuthenticated().subscribe(authenticated => expect(authenticated).toBeTruthy());
+      service
+        .isAuthenticated()
+        .subscribe(authenticated => expect(authenticated).toBeTruthy());
     });
 
     it('Should return false if user is NOT authenticated', () => {
       service.user = of({} as User);
 
-      service.isAuthenticated().subscribe(authenticated => expect(authenticated).toBeFalsy());
+      service
+        .isAuthenticated()
+        .subscribe(authenticated => expect(authenticated).toBeFalsy());
     });
-
   });
 
-  it('should log in with google', () => {
-    const expectedUser = { uid: 'user-uid', email: 'user@test.com' };
+  describe('user login', () => {
+    it('should get the user when logging in', () => {
+      expectedUser = {
+        uid: 'user-uid',
+        email: 'user@test.com',
+        admin: false
+      } as User;
 
-    spyOn(fireAuth.auth, 'signInWithPopup').and.returnValue(
-      of({ user: expectedUser })
-    );
-    spyOn(userService, 'updateUser').and.returnValue(of({}));
+      spyOn(fireAuth.auth, 'signInWithPopup').and.returnValue(
+        Promise.resolve({ user: expectedUser })
+      );
+      spyOn(userService, 'getUser').and.returnValue(
+        of(UserUtils.toUserFirestore(expectedUser))
+      );
+      spyOn(userService, 'createUser');
 
-    service.googleLogin();
+      service.googleLogin();
 
-    expect(fireAuth.auth.signInWithPopup).toHaveBeenCalled();
+      service.user.subscribe(user => expect(user).toEqual(expectedUser));
 
-    service.user.subscribe(user => {
-      expect(user.email).toEqual(expectedUser.email);
-      expect(user.uid).toEqual(expectedUser.uid);
+      expect(userService.createUser).not.toHaveBeenCalled();
     });
 
-    expect(userService.updateUser).toHaveBeenCalledWith(expectedUser);
+    it('should create the user when logging in and it doesnt exist yet', () => {
+      expectedUser = {
+        uid: 'user-uid',
+        email: 'user@test.com',
+        admin: false
+      } as User;
+
+      spyOn(fireAuth.auth, 'signInWithPopup').and.returnValue(
+        of({ user: expectedUser })
+      );
+      spyOn(userService, 'getUser').and.returnValue(
+        throwError({ status: 404 })
+      );
+      spyOn(userService, 'createUser').and.returnValue(
+        of(UserUtils.toUserFirestore(expectedUser))
+      );
+
+      service.googleLogin();
+
+      service.user.subscribe(user => expect(user).toEqual(expectedUser));
+    });
   });
 });

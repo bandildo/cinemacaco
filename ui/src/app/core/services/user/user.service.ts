@@ -1,4 +1,3 @@
-import { VoteFirestore } from '../../../game/models/vote-firestore.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
@@ -11,10 +10,16 @@ import { Observable } from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  updateUser(user: User) {
-    return this.http.patch(
-      UrlUtils.generateDbUrl(`/users/${user.uid}`),
+  createUser(user: User): Observable<UserFirestore> {
+    return this.http.post(
+      UrlUtils.generateDbUrl(`/users?documentId=${user.uid}`),
       UserUtils.toUserFirestore(user)
+    ) as Observable<UserFirestore>;
+  }
+
+  getUser(uid: string): Observable<UserFirestore> {
+    return this.http.get(
+      UrlUtils.generateDbUrl(`/users/${uid}`)
     ) as Observable<UserFirestore>;
   }
 }

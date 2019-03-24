@@ -9,5 +9,8 @@ export interface UserFirestore {
       admin: {
         booleanValue: boolean;
       };
+      macaco: {
+        booleanValue: boolean;
+      };
     };
   }

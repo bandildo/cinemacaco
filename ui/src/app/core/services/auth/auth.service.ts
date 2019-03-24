@@ -33,18 +33,17 @@ export class AuthService {
     return this.user.pipe(map(user => !!user.uid));
   }
 
+  isMacaco(): Observable<boolean> {
+    return this.user.pipe(map(user => user.macaco));
+  }
+
   googleLogin() {
     this.login(new firebase.auth.GoogleAuthProvider());
   }
 
   private login(provider: firebase.auth.AuthProvider) {
     from(this.fireAuth.auth.signInWithPopup(provider)).subscribe(credential => {
-      const user = {
-        uid: credential.user.uid,
-        email: credential.user.email,
-        admin: false
-      } as User;
-
+      const user = this.generateNewUser(credential);
       this.getAndUpdateCache(user);
     });
   }
@@ -62,5 +61,14 @@ export class AuthService {
         }
       }
     );
+  }
+
+  generateNewUser(credential: firebase.auth.UserCredential){
+    return {
+      uid: credential.user.uid,
+      email: credential.user.email,
+      admin: false,
+      macaco: false
+    } as User;
   }
 }

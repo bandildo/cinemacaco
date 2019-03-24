@@ -4,6 +4,7 @@ import { MacacoComponent } from './macaco/macaco.component';
 import { HumanoComponent } from './humano/humano.component';
 import { AdminGuard } from '../core/guards/admin.guard';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { MacacoGuard } from '../core/guards/macaco.guard';
 
 export const gameRoutes = [
   {
@@ -15,7 +16,7 @@ export const gameRoutes = [
     path: 'macaco',
     component: MacacoComponent,
     resolve: { currentGame: CurrentGameResolver },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, MacacoGuard]
   },
   {
     path: 'humano',

@@ -44,7 +44,6 @@ describe('Auth Service', () => {
     it('Should return true if user is admin', () => {
       service.setCachedUser({ admin: true } as User);
 
-
       service.isAdmin().subscribe(admin => expect(admin).toBeTruthy());
     });
   });
@@ -67,16 +66,26 @@ describe('Auth Service', () => {
     });
   });
 
+  describe('is macaco', () => {
+    it('should return true if user is macaco', () => {
+      service.setCachedUser({ macaco: true } as User);
+
+      service.isMacaco().subscribe(macaco => expect(macaco).toBeTruthy());
+    });
+
+    it('should return false if user is NOT macaco', () => {
+      service.setCachedUser({ macaco: false } as User);
+
+      service.isMacaco().subscribe(macaco => expect(macaco).toBeFalsy());
+    });
+  });
+
   describe('user login', () => {
     it('should get the user when logging in', () => {
-      expectedUser = {
-        uid: 'user-uid',
-        email: 'user@test.com',
-        admin: false
-      } as User;
+      expectedUser = UserUtils.getTestUser();
 
       spyOn(fireAuth.auth, 'signInWithPopup').and.returnValue(
-        Promise.resolve({ user: expectedUser })
+        Promise.resolve({ user: UserUtils.getTestLoginCredential() })
       );
       spyOn(userService, 'getUser').and.returnValue(
         of(UserUtils.toUserFirestore(expectedUser))
@@ -91,14 +100,11 @@ describe('Auth Service', () => {
     });
 
     it('should create the user when logging in and it doesnt exist yet', () => {
-      expectedUser = {
-        uid: 'user-uid',
-        email: 'user@test.com',
-        admin: false
-      } as User;
+      const loginCredential = UserUtils.getTestLoginCredential();
+      expectedUser = UserUtils.getTestUser();
 
       spyOn(fireAuth.auth, 'signInWithPopup').and.returnValue(
-        of({ user: expectedUser })
+        of({ user: loginCredential })
       );
       spyOn(userService, 'getUser').and.returnValue(
         throwError({ status: 404 })
@@ -109,7 +115,7 @@ describe('Auth Service', () => {
 
       service.googleLogin();
 
-      service.user.subscribe(user => expect(user).toEqual(expectedUser));
+      service.user.subscribe(user => expect(user).toEqual(service.generateNewUser(loginCredential)));
     });
   });
 });

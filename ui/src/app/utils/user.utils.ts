@@ -13,6 +13,9 @@ export default class UserUtils {
         },
         admin: {
           booleanValue: user.admin
+        },
+        macaco: {
+          booleanValue: user.macaco
         }
       }
     };
@@ -22,7 +25,8 @@ export default class UserUtils {
     return {
       uid: user.fields.uid.stringValue,
       email: user.fields.email.stringValue,
-      admin: user.fields.admin.booleanValue
+      admin: user.fields.admin.booleanValue,
+      macaco: user.fields.macaco.booleanValue
     };
   }
 
@@ -30,7 +34,19 @@ export default class UserUtils {
     return {
       uid: 'user-uid',
       email: 'test@email.com',
-      admin: false
+      admin: false,
+      macaco: false
     } as User;
+  }
+
+  static getTestLoginCredential(): firebase.auth.UserCredential {
+    const testUser = this.getTestUser();
+
+    return {
+      user: {
+        uid: testUser.uid,
+        email: testUser.email
+      }
+    } as firebase.auth.UserCredential;
   }
 }

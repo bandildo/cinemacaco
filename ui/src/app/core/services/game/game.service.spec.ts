@@ -18,15 +18,15 @@ describe('Game Service', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, CoreModule, FirebaseStubsModule],
+      imports: [HttpClientTestingModule, CoreModule, FirebaseStubsModule]
     }).compileComponents();
   }));
 
   beforeEach(inject(
     [HttpTestingController, GameService],
-    (httpTestingController, injectedVotingService) => {
+    (httpTestingController, injectedGameService) => {
       httpMock = httpTestingController;
-      service = injectedVotingService;
+      service = injectedGameService;
     }
   ));
 
@@ -53,7 +53,7 @@ describe('Game Service', () => {
 
       call.flush(expectedGameResponse);
     });
-    
+
     it('should post a Macaco vote', () => {
       const expectedVote = VoteUtils.getTestVote();
       const expectedVoteResponse = VoteUtils.toVoteFirestore(expectedVote);
@@ -93,9 +93,7 @@ describe('Game Service', () => {
     });
   });
 
-  describe('POST', () => {
-
-  });
+  describe('POST', () => {});
 
   describe('GET', () => {
     it('should get the current game', () => {

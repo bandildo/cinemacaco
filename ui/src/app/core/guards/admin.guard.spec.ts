@@ -5,6 +5,7 @@ import { AdminGuard } from './admin.guard';
 import { AuthService } from '../services/auth/auth.service';
 import { CoreModule } from '../core.module';
 import { of } from 'rxjs';
+import { FirebaseStubsModule } from 'src/app/firebase-stubs/firebase-stubs.module';
 
 describe('Admin Guard', () => {
   let guard: AdminGuard;
@@ -12,7 +13,7 @@ describe('Admin Guard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule]
+      imports: [CoreModule, FirebaseStubsModule]
     });
   });
 
@@ -28,8 +29,8 @@ describe('Admin Guard', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should activate route when logged in', () => {
-    spyOn(authService, 'isAuthenticated').and.returnValue(of(true));
+  it('should activate when user is admin', () => {
+    spyOn(authService, 'isAdmin').and.returnValue(of(true));
 
     guard.canActivate().subscribe(activation => expect(activation).toBeTruthy());
   });

@@ -5,18 +5,22 @@ import { GameService } from './services/game/game.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthService } from './services/auth/auth.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { UserService } from './services/user/user.service';
 
 @NgModule({
   declarations: [
   ],
   imports: [
     AngularFirestoreModule,
+    AngularFireAuthModule,
     CommonModule,
     HttpClientModule,
   ],
   providers: [
     AuthService,
     GameService,
+    UserService,
     CurrentGameResolver
   ]
 })

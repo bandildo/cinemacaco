@@ -6,7 +6,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { of, throwError } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { User } from '../../models/user.model';
-import { HttpErrorResponse } from '@angular/common/http';
 import UserUtils from 'src/app/utils/user.utils';
 
 describe('Auth Service', () => {
@@ -37,13 +36,14 @@ describe('Auth Service', () => {
 
   describe('is admin', () => {
     it('Should return false if user is NOT admin', () => {
-      service.user = of({ admin: false } as User);
+      service.setCachedUser({ admin: false } as User);
 
       service.isAdmin().subscribe(admin => expect(admin).toBeFalsy());
     });
 
     it('Should return true if user is admin', () => {
-      service.user = of({ admin: true } as User);
+      service.setCachedUser({ admin: true } as User);
+
 
       service.isAdmin().subscribe(admin => expect(admin).toBeTruthy());
     });
@@ -51,7 +51,7 @@ describe('Auth Service', () => {
 
   describe('is authenticated', () => {
     it('Should return true if user is authenticated', () => {
-      service.user = of({ uid: 'user-uid' } as User);
+      service.setCachedUser({ uid: 'user-uid' } as User);
 
       service
         .isAuthenticated()
@@ -59,7 +59,7 @@ describe('Auth Service', () => {
     });
 
     it('Should return false if user is NOT authenticated', () => {
-      service.user = of({} as User);
+      service.setCachedUser({} as User);
 
       service
         .isAuthenticated()

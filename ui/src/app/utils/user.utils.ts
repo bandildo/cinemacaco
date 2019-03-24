@@ -18,7 +18,7 @@ export default class UserUtils {
     };
   }
 
-  static toUser(user: UserFirestore) {
+  static toUser(user: UserFirestore): User {
     return {
       uid: user.fields.uid.stringValue,
       email: user.fields.email.stringValue,

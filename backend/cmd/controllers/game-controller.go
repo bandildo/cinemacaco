@@ -19,6 +19,16 @@ func GetCurrentGame(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func EndCurrentGame(w http.ResponseWriter, r *http.Request) {
+	error := database.DeleteCurrentGame()
+
+	if error == nil {
+		w.WriteHeader(http.StatusAccepted)
+	} else {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+}
+
 func StartNewGame(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	var game database.CurrentGame

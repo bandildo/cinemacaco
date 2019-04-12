@@ -28,6 +28,10 @@ func GetCurrentGame() *CurrentGame {
 	return game
 }
 
+func DeleteCurrentGame() error {
+	return GetDB().Table("currentgame").Delete(CurrentGame{}).Error
+}
+
 func StartNewGame(newGame CurrentGame) {
 	GetDB().Table("currentgame").Create(&newGame)
 }

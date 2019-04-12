@@ -22,10 +22,12 @@ func handleRequests() {
 	gamesRouter := router.PathPrefix("/games").Subrouter()
 	gamesRouter.HandleFunc("/current", controllers.GetCurrentGame).Methods("GET")
 	gamesRouter.HandleFunc("/current", controllers.StartNewGame).Methods("POST")
+	gamesRouter.HandleFunc("/current", controllers.EndCurrentGame).Methods("DELETE")
 
 	headersOk := handlers.AllowedHeaders([]string{"Content-Type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
-	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(originsOk, headersOk)(router)))
+	methodsOk := handlers.AllowedMethods([]string{"OPTIONS", "GET", "HEAD", "POST", "DELETE"})
+	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(originsOk, headersOk, methodsOk)(router)))
 }
 
 func main() {

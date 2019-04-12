@@ -1,5 +1,12 @@
-<label>
-  Current Game:
-  {{ currentGame.name }}
-</label>
-<app-voting-buttons [isMacaco]="false"></app-voting-buttons>
+<div *ngIf="hasGame()">
+  <label>
+    Current Game:
+    {{ currentGame.name }}
+  </label>
+  <app-voting-buttons [isMacaco]="false"></app-voting-buttons>
+</div>
+
+<div *ngIf="!hasGame()">
+  <h1>NO ACTIVE GAMES</h1>
+</div>
+

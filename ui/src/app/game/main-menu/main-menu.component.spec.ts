@@ -64,16 +64,6 @@ describe('MainMenuComponent', () => {
   });
 
   describe('Humano button', () => {
-    it('should exist', () => {
-      expect(
-        fixture.debugElement.query(By.css('button#humanoButton.btn'))
-      ).not.toBeNull();
-      expect(
-        fixture.debugElement.query(By.css('button#humanoButton.btn'))
-          .nativeElement.innerText
-      ).toContain('Humano');
-    });
-
     it('should redirect to Humano page', () => {
       spyOn(router, 'navigate');
       component.onHumanoClick();
@@ -82,16 +72,6 @@ describe('MainMenuComponent', () => {
   });
 
   describe('Admin button', () => {
-    it('should have an Admin button', () => {
-      expect(
-        fixture.debugElement.query(By.css('button#adminButton.btn'))
-      ).not.toBeNull();
-      expect(
-        fixture.debugElement.query(By.css('button#adminButton.btn'))
-          .nativeElement.innerText
-      ).toContain('Admin');
-    });
-
     it('should redirect to Admin page', () => {
       spyOn(router, 'navigate');
       component.onAdminClick();
@@ -99,35 +79,7 @@ describe('MainMenuComponent', () => {
     });
   });
 
-  describe('Results button', () => {
-    it('should have a Results button', () => {
-      expect(
-        fixture.debugElement.query(By.css('button#resultsButton.btn'))
-      ).not.toBeNull();
-      expect(
-        fixture.debugElement.query(By.css('button#resultsButton.btn'))
-          .nativeElement.innerText
-      ).toContain('Results');
-    });
-
-    it('should redirect to Results page', () => {
-      spyOn(router, 'navigate');
-      component.onResultsClick();
-      expect(router.navigate).toHaveBeenCalledWith(['results']);
-    });
-  });
-
   describe('Login button', () => {
-    it('should have a Login button', () => {
-      expect(
-        fixture.debugElement.query(By.css('button#loginButton.btn'))
-      ).not.toBeNull();
-      expect(
-        fixture.debugElement.query(By.css('button#loginButton.btn'))
-          .nativeElement.innerText
-      ).toContain('Login');
-    });
-
     it('should attempt to login with google', () => {
       spyOn(authService, 'googleLogin');
 
@@ -136,4 +88,13 @@ describe('MainMenuComponent', () => {
       expect(authService.googleLogin).toHaveBeenCalled();
     });
   });
+  
+  describe('Results button', () => {
+    it('should redirect to Results page', () => {
+      spyOn(router, 'navigate');
+      component.onResultsClick();
+      expect(router.navigate).toHaveBeenCalledWith(['results']);
+    });
+  });
+
 });

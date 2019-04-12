@@ -12,6 +12,7 @@ import { AdminComponent } from './admin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import GameUtils from 'src/app/utils/game.utils';
+import { Game } from '../models/game.model';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -59,7 +60,6 @@ describe('AdminComponent', () => {
       const game = GameUtils.getTestGame();
 
       component.name.setValue(game.name);
-      jasmine.clock().mockDate(game.timestamp);
 
       spyOn(gameService, 'startGame').and.returnValue(of({}));
 
@@ -67,24 +67,19 @@ describe('AdminComponent', () => {
         .query(By.css('button[data-action="game:start"]'))
         .nativeElement.click();
 
-      expect(gameService.startGame).toHaveBeenCalledWith(jasmine.any(String), game.name, game.timestamp);
+      expect(gameService.startGame).toHaveBeenCalledWith({ name: game.name } as Game);
     });
   });
 
   describe('End game button', () => {
     it('should ask game service to end the game', () => {
-      spyOn(gameService, 'deleteCurrentGame').and.returnValue(of({}));
-      spyOn(gameService, 'deleteCurrentHumanVotes').and.returnValue(of({}));
-      spyOn(gameService, 'deleteCurrentMacacoVote').and.returnValue(of({}));
+      spyOn(gameService, 'endCurrentGame').and.returnValue(of({}));
 
       fixture.debugElement
         .query(By.css('button[data-action="game:end"]'))
         .nativeElement.click();
 
-      expect(gameService.deleteCurrentGame).toHaveBeenCalled();
-      expect(gameService.deleteCurrentHumanVotes).toHaveBeenCalled();
-      expect(gameService.deleteCurrentMacacoVote).toHaveBeenCalled();
+      expect(gameService.endCurrentGame).toHaveBeenCalled();
     });
   });
-  
 });

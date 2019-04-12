@@ -1,19 +1,18 @@
 import { CoreModule } from 'src/app/core/core.module';
-import { Vote } from 'src/app/game/models/vote.model';
 import { ActivatedRoute } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HumanoComponent } from './humano.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { defer, of } from 'rxjs';
 import { GameModule } from '../game.module';
+import { Game } from '../models/game.model';
+import { By } from '@angular/platform-browser';
 
 describe('HumanoComponent', () => {
   let component: HumanoComponent;
   let fixture: ComponentFixture<HumanoComponent>;
 
-  const data = {
-    currentGame: {} as Vote
-  };
+  let data;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,10 +32,36 @@ describe('HumanoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HumanoComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should display voting buttons if there is a game active', () => {
+    data = {
+      currentGame: {
+        name: 'game-name',
+        id: 'game-id'
+      } as Game
+    };
+
+    fixture.detectChanges();
+
+    expect(
+      fixture.debugElement.query(By.css('app-voting-buttons'))
+    ).toBeTruthy();
+  });
+
+  it('should display waiting if NO game is active', () => {
+    data = {
+      currentGame: {} as Game
+    };
+
+    fixture.detectChanges();
+
+    expect(
+      fixture.debugElement.query(By.css('app-voting-buttons'))
+    ).toBeFalsy();
+
+    expect(
+      fixture.debugElement.query(By.css('h1'))
+    ).toBeTruthy();
   });
 });

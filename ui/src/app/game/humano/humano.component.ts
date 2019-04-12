@@ -1,4 +1,3 @@
-import { Vote } from 'src/app/game/models/vote.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/game/models/game.model';
@@ -8,7 +7,7 @@ import { Game } from 'src/app/game/models/game.model';
   styleUrls: ['./humano.component.css']
 })
 export class HumanoComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   currentGame: Game;
 
@@ -16,5 +15,9 @@ export class HumanoComponent implements OnInit {
     this.activatedRoute.data.subscribe(resolvedData => {
       this.currentGame = resolvedData.currentGame;
     });
+  }
+
+  hasGame(): boolean {
+    return !!this.currentGame.id;
   }
 }

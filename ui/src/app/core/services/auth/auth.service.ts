@@ -5,7 +5,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../models/user.model';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
-import UserUtils from 'src/app/utils/user.utils';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
@@ -14,8 +13,8 @@ export class AuthService {
 
   constructor(
     private fireAuth: AngularFireAuth,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+  ) { }
 
   get user(): Observable<User> {
     return this.cachedUser.asObservable();
@@ -51,24 +50,24 @@ export class AuthService {
   private getAndUpdateCache(user: User) {
     this.userService.getUser(user.uid).subscribe(
       gotUser => {
-        this.cachedUser.next(UserUtils.toUser(gotUser));
+        this.cachedUser.next(gotUser);
       },
       (error: HttpErrorResponse) => {
         if (error.status === 404) {
-          this.userService.createUser(user).subscribe(createdUser => {
-            this.cachedUser.next(UserUtils.toUser(createdUser));
+          this.userService.createUser(user).subscribe(() => {
+            this.cachedUser.next(user);
           });
         }
       }
     );
   }
 
-  generateNewUser(credential: firebase.auth.UserCredential){
+  generateNewUser(credential: firebase.auth.UserCredential) {
     return {
       uid: credential.user.uid,
       email: credential.user.email,
-      admin: false,
-      macaco: false
+      admin: true,
+      macaco: true
     } as User;
   }
 }

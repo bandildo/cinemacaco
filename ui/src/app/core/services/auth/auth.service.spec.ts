@@ -88,9 +88,11 @@ describe('Auth Service', () => {
         Promise.resolve({ user: UserUtils.getTestLoginCredential() })
       );
       spyOn(userService, 'getUser').and.returnValue(
-        of(UserUtils.toUserFirestore(expectedUser))
+        of(expectedUser)
       );
-      spyOn(userService, 'createUser');
+      spyOn(userService, 'createUser').and.returnValue(
+        of({})
+      );
 
       service.googleLogin();
 
@@ -104,13 +106,13 @@ describe('Auth Service', () => {
       expectedUser = UserUtils.getTestUser();
 
       spyOn(fireAuth.auth, 'signInWithPopup').and.returnValue(
-        of({ user: loginCredential })
+        of(loginCredential)
       );
       spyOn(userService, 'getUser').and.returnValue(
         throwError({ status: 404 })
       );
       spyOn(userService, 'createUser').and.returnValue(
-        of(UserUtils.toUserFirestore(expectedUser))
+        of(expectedUser)
       );
 
       service.googleLogin();

@@ -32,8 +32,3 @@ func init() {
 
 	fmt.Println("Successfully connected!")
 }
-
-//returns a handle to the DB object
-func GetDB() *gorm.DB {
-	return db
-}

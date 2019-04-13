@@ -7,15 +7,20 @@ import (
 )
 
 type CurrentGame struct {
-	ID      string    `json:"id"`
-	Name    string    `json:"name"`
-	Started time.Time `json:"started"`
+	ID         string    `json:"id"`
+	Name       string    `json:"name"`
+	Started    time.Time `json:"started"`
+	MacacoVote bool      `json:"macacoVote"`
+}
+
+type Vote struct {
+	ThumbsUp bool `json:"thumbsUp"`
 }
 
 func GetCurrentGame() *CurrentGame {
 	game := &CurrentGame{}
 
-	err := GetDB().Table("currentgame").First(game).Error
+	err := db.Table("currentgame").First(game).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		panic(err)
@@ -29,9 +34,18 @@ func GetCurrentGame() *CurrentGame {
 }
 
 func DeleteCurrentGame() error {
-	return GetDB().Table("currentgame").Delete(CurrentGame{}).Error
+	return db.Table("currentgame").Delete(CurrentGame{}).Error
 }
 
 func StartNewGame(newGame CurrentGame) {
-	GetDB().Table("currentgame").Create(&newGame)
+	db.Table("currentgame").Create(&newGame)
+}
+
+func UpdateCurrentGameVote(vote Vote) {
+	currentGame := &CurrentGame{}
+
+	db.Table("currentgame").First(currentGame)
+
+	currentGame.MacacoVote = vote.ThumbsUp
+	db.Table("currentgame").Save(currentGame)
 }

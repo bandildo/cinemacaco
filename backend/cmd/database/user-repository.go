@@ -14,7 +14,7 @@ type User struct {
 func GetUser(uid string) *User {
 	user := &User{}
 
-	err := GetDB().Table("users").Where("uid = ?", uid).First(user).Error
+	err := db.Table("users").Where("uid = ?", uid).First(user).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		panic(err)
@@ -28,5 +28,5 @@ func GetUser(uid string) *User {
 }
 
 func RegisterUser(user User) {
-	GetDB().Create(&user)
+	db.Create(&user)
 }

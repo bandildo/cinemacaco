@@ -23,6 +23,7 @@ func handleRequests() {
 	gamesRouter.HandleFunc("/current", controllers.GetCurrentGame).Methods("GET")
 	gamesRouter.HandleFunc("/current", controllers.StartNewGame).Methods("POST")
 	gamesRouter.HandleFunc("/current", controllers.EndCurrentGame).Methods("DELETE")
+	gamesRouter.HandleFunc("/vote/macaco", controllers.CastMacacoVote).Methods("POST")
 
 	headersOk := handlers.AllowedHeaders([]string{"Content-Type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})

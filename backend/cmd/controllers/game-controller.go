@@ -40,3 +40,16 @@ func StartNewGame(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusCreated)
 }
+
+func CastMacacoVote(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var vote database.Vote
+	err := decoder.Decode(&vote)
+	if err != nil {
+		panic(err)
+	}
+
+	database.UpdateCurrentGameVote(vote)
+
+	w.WriteHeader(http.StatusAccepted)
+}

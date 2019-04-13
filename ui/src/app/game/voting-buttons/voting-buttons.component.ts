@@ -7,13 +7,10 @@ import { GameService } from '../../core/services/game/game.service';
   styleUrls: ['./voting-buttons.component.css']
 })
 export class VotingButtonsComponent {
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService) { }
 
   @Input()
   public isMacaco: boolean;
-
-  // @Input()
-  // public gameId: string;
 
   onVote(thumbsUp: boolean) {
     if (this.isMacaco) {

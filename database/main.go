@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	_ "github.com/golang-migrate/migrate/database/postgres"
 
@@ -18,6 +19,9 @@ const (
 )
 
 func main() {
+
+	direction := os.Args[1]
+
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
@@ -36,10 +40,14 @@ func main() {
 
 	migrator, _ := gomigrate.NewMigrator(db, gomigrate.Postgres{}, "./migrations")
 
-	error := migrator.Migrate()
-	// error := migrator.Rollback()
+	var migrationError error
+	if direction == "-down" {
+		migrationError = migrator.Rollback()
+	} else {
+		migrationError = migrator.Migrate()
+	}
 
-	if error != nil {
+	if migrationError != nil {
 		panic(err)
 	}
 }

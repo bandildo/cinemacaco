@@ -1,0 +1,1 @@
+go build -o migration.exe && migration.exe -up

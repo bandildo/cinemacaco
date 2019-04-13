@@ -12,12 +12,13 @@ export class HumanoComponent implements OnInit {
   currentGame: Game;
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(resolvedData => {
-      this.currentGame = resolvedData.currentGame;
-    });
+    this.activatedRoute.data.subscribe(
+      (resolvedData) =>
+        this.currentGame = resolvedData.currentGame
+    );
   }
 
   hasGame(): boolean {
-    return !!this.currentGame.id;
+    return !!this.currentGame;
   }
 }

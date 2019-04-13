@@ -12,11 +12,7 @@ import (
 func GetCurrentGame(w http.ResponseWriter, r *http.Request) {
 	currentGame := database.GetCurrentGame()
 
-	if currentGame == nil {
-		w.WriteHeader(http.StatusNotFound)
-	} else {
-		json.NewEncoder(w).Encode(currentGame)
-	}
+	json.NewEncoder(w).Encode(currentGame)
 }
 
 func EndCurrentGame(w http.ResponseWriter, r *http.Request) {

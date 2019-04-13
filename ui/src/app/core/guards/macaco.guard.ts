@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MacacoGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   canActivate(): Observable<boolean> {
-    return this.authService.isMacaco();
+    return of(true);
+    // return this.authService.isMacaco();
   }
 }

@@ -10,22 +10,27 @@ import { By } from '@angular/platform-browser';
 
 import { VotingButtonsComponent } from './voting-buttons.component';
 import { of } from 'rxjs';
+import { User } from 'firebase';
+import { FirebaseStubsModule } from 'src/app/firebase-stubs/firebase-stubs.module';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 describe('VotingButtonsComponent', () => {
   let component: VotingButtonsComponent;
   let fixture: ComponentFixture<VotingButtonsComponent>;
 
-  let votingService: GameService;
+  let gameService: GameService;
+  let authService: AuthService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [VotingButtonsComponent],
-      imports: [CoreModule]
+      imports: [CoreModule, FirebaseStubsModule]
     }).compileComponents();
   }));
 
-  beforeEach(inject([GameService], injectedVotingService => {
-    votingService = injectedVotingService;
+  beforeEach(inject([GameService, AuthService], (injectedGameService, injectedAuthService) => {
+    gameService = injectedGameService;
+    authService = injectedAuthService;
   }));
 
   beforeEach(() => {
@@ -47,31 +52,29 @@ describe('VotingButtonsComponent', () => {
       });
 
       it('should cast positive macaco vote when clicking as macaco', () => {
-        // const gameId = 'game-id';
-        // component.gameId = gameId;
         component.isMacaco = true;
 
-        spyOn(votingService, 'castMacacoVote').and.returnValue(of({}));
+        spyOn(gameService, 'castMacacoVote').and.returnValue(of({}));
 
         fixture.debugElement
           .query(By.css('button.btn-yes'))
           .nativeElement.click();
 
-        expect(votingService.castMacacoVote).toHaveBeenCalledWith(true);
+        expect(gameService.castMacacoVote).toHaveBeenCalledWith(true);
       });
 
       it('should cast positive human vote when clicking as human', () => {
-        // const gameId = 'game-id';
-        // component.gameId = gameId;
         component.isMacaco = false;
+        const uid = 'test-user-id';
 
-        spyOn(votingService, 'castHumanVote').and.returnValue(of({}));
+        spyOn(gameService, 'castHumanVote').and.returnValue(of({}));
+        spyOnProperty(authService, 'user', 'get').and.returnValue(of({ uid } as User));
 
         fixture.debugElement
           .query(By.css('button.btn-yes'))
           .nativeElement.click();
 
-        expect(votingService.castHumanVote).toHaveBeenCalledWith(true);
+        expect(gameService.castHumanVote).toHaveBeenCalledWith(uid, true);
       });
     });
 
@@ -83,31 +86,30 @@ describe('VotingButtonsComponent', () => {
       });
 
       it('should generate a negative macaco vote when clicking as macaco', () => {
-        // const gameId = 'game-id';
-        // component.gameId = gameId;
         component.isMacaco = true;
 
-        spyOn(votingService, 'castMacacoVote').and.returnValue(of({}));
+        spyOn(gameService, 'castMacacoVote').and.returnValue(of({}));
 
         fixture.debugElement
           .query(By.css('button.btn-no'))
           .nativeElement.click();
 
-        expect(votingService.castMacacoVote).toHaveBeenCalledWith(false);
+        expect(gameService.castMacacoVote).toHaveBeenCalledWith(false);
       });
 
       it('should generate a negative human vote when clicking as human', () => {
-        // const gameId = 'game-id';
-        // component.gameId = gameId;
         component.isMacaco = false;
+        const uid = 'test-user-id';
 
-        spyOn(votingService, 'castHumanVote').and.returnValue(of({}));
+
+        spyOn(gameService, 'castHumanVote').and.returnValue(of({}));
+        spyOnProperty(authService, 'user', 'get').and.returnValue(of({ uid } as User));
 
         fixture.debugElement
           .query(By.css('button.btn-no'))
           .nativeElement.click();
 
-        expect(votingService.castHumanVote).toHaveBeenCalledWith(false);
+        expect(gameService.castHumanVote).toHaveBeenCalledWith(uid, false);
       });
     });
   });

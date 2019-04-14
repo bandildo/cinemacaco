@@ -10,7 +10,6 @@ export class MacacoGuard implements CanActivate {
   constructor(private authService: AuthService) { }
 
   canActivate(): Observable<boolean> {
-    return of(true);
-    // return this.authService.isMacaco();
+    return this.authService.isMacaco();
   }
 }

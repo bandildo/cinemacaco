@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { defer, of } from 'rxjs';
 import { Vote } from 'src/app/game/models/vote.model';
 import { GameModule } from '../game.module';
+import { FirebaseStubsModule } from 'src/app/firebase-stubs/firebase-stubs.module';
 
 describe('MacacoComponent', () => {
   let component: MacacoComponent;
@@ -18,7 +19,7 @@ describe('MacacoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, GameModule, CoreModule],
+      imports: [RouterTestingModule, GameModule, CoreModule, FirebaseStubsModule],
       providers: [
         {
           provide: ActivatedRoute,

@@ -37,8 +37,9 @@ export class GameService {
     );
   }
 
-  castHumanVote(thumbsUp: boolean): Observable<any> {
+  castHumanVote(userId: string, thumbsUp: boolean): Observable<any> {
     const humanVote = {
+      userId,
       thumbsUp
     } as Vote;
 

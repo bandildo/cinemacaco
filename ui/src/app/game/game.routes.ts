@@ -10,18 +10,18 @@ export const gameRoutes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AdminGuard, AuthGuard]
+    // canActivate: [AdminGuard, AuthGuard]
   },
   {
     path: 'macaco',
     component: MacacoComponent,
     resolve: { currentGame: CurrentGameResolver },
-    canActivate: [AuthGuard, MacacoGuard]
+    // canActivate: [AuthGuard, MacacoGuard]
   },
   {
     path: 'humano',
     component: HumanoComponent,
     resolve: { currentGame: CurrentGameResolver },
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   }
 ];

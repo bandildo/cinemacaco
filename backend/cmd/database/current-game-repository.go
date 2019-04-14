@@ -14,7 +14,8 @@ type CurrentGame struct {
 }
 
 type Vote struct {
-	ThumbsUp bool `json:"thumbsUp"`
+	UserID   string `json:"userId"`
+	ThumbsUp bool   `json:"thumbsUp"`
 }
 
 func GetCurrentGame() *CurrentGame {
@@ -37,7 +38,7 @@ func DeleteCurrentGame() error {
 	return db.Table("currentgame").Delete(CurrentGame{}).Error
 }
 
-func StartNewGame(newGame CurrentGame) {
+func CreateNewGame(newGame CurrentGame) {
 	db.Table("currentgame").Create(&newGame)
 }
 
@@ -48,4 +49,8 @@ func UpdateCurrentGameVote(vote Vote) {
 
 	currentGame.MacacoVote = vote.ThumbsUp
 	db.Table("currentgame").Save(currentGame)
+}
+
+func CreateNewVote(vote Vote) {
+	db.Table("currentvotes").Create(&vote)
 }

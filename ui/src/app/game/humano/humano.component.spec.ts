@@ -7,6 +7,7 @@ import { defer, of } from 'rxjs';
 import { GameModule } from '../game.module';
 import { Game } from '../models/game.model';
 import { By } from '@angular/platform-browser';
+import { FirebaseStubsModule } from 'src/app/firebase-stubs/firebase-stubs.module';
 
 describe('HumanoComponent', () => {
   let component: HumanoComponent;
@@ -16,7 +17,7 @@ describe('HumanoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, GameModule, CoreModule],
+      imports: [RouterTestingModule, GameModule, CoreModule, FirebaseStubsModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -51,7 +52,7 @@ describe('HumanoComponent', () => {
 
   it('should display waiting if NO game is active', () => {
     data = {
-      currentGame: {} as Game
+      currentGame: null
     };
 
     fixture.detectChanges();

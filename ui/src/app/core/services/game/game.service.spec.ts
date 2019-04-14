@@ -46,7 +46,7 @@ describe('Game Service', () => {
     });
 
     it('should post a Human vote', () => {
-      service.castHumanVote(true).subscribe(() => { }, error => fail(error));
+      service.castHumanVote('human-id', true).subscribe(() => { }, error => fail(error));
 
       const call = httpMock.expectOne(
         UrlUtils.generateDbUrl('/games/vote/human')

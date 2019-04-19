@@ -27,53 +27,35 @@ describe('Game Service', () => {
   ));
 
   describe('POST', () => {
-    it('Should post new game', () => {
+    it('Should start new game', () => {
       const game = GameUtils.getTestGame();
 
-      service.startGame(game).subscribe(() => { }, error => fail(error));
+      service.startNewGame(game).subscribe(() => { }, error => fail(error));
 
-      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games/current'));
-      expect(call.request.method).toEqual('POST');
-    });
-
-    it('should post a Macaco vote', () => {
-      service.castMacacoVote(true).subscribe(() => { }, error => fail(error));
-
-      const call = httpMock.expectOne(
-        UrlUtils.generateDbUrl('/games/vote/macaco')
-      );
-      expect(call.request.method).toEqual('POST');
-    });
-
-    it('should post a Human vote', () => {
-      service.castHumanVote('human-id', true).subscribe(() => { }, error => fail(error));
-
-      const call = httpMock.expectOne(
-        UrlUtils.generateDbUrl('/games/vote/human')
-      );
+      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games'));
       expect(call.request.method).toEqual('POST');
     });
   });
 
   describe('GET', () => {
-    it('should get the current game', () => {
+    it('should return the active game', () => {
       const expectedGame = GameUtils.getTestGame();
 
-      service.getCurrentGame().subscribe(response => {
+      service.getActiveGame().subscribe(response => {
         expect(response).toEqual(expectedGame);
       });
 
-      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games/current'));
+      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games/active'));
       expect(call.request.method).toEqual('GET');
       call.flush(expectedGame);
     });
   });
 
   describe('DELETE', () => {
-    it('Should delete current game', () => {
-      service.endCurrentGame().subscribe(() => { }, error => fail(error));
+    it('Should deactivate the active game', () => {
+      service.endActiveGame().subscribe(() => { }, error => fail(error));
 
-      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games/current'));
+      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games/active'));
       expect(call.request.method).toEqual('DELETE');
     });
   });

@@ -20,11 +20,12 @@ func handleRequests() {
 	usersRouter.HandleFunc("/new", controllers.NewUser).Methods("POST")
 
 	gamesRouter := router.PathPrefix("/games").Subrouter()
-	gamesRouter.HandleFunc("/current", controllers.GetCurrentGame).Methods("GET")
-	gamesRouter.HandleFunc("/current", controllers.StartNewGame).Methods("POST")
-	gamesRouter.HandleFunc("/current", controllers.EndCurrentGame).Methods("DELETE")
-	gamesRouter.HandleFunc("/vote/macaco", controllers.CastMacacoVote).Methods("POST")
-	gamesRouter.HandleFunc("/vote/human", controllers.CastHumanVote).Methods("POST")
+	gamesRouter.HandleFunc("", controllers.StartNewGame).Methods("POST")
+	gamesRouter.HandleFunc("/active", controllers.GetActiveGame).Methods("GET")
+	gamesRouter.HandleFunc("/active", controllers.EndCurrentGame).Methods("DELETE")
+
+	votesRouter := router.PathPrefix("/votes").Subrouter()
+	votesRouter.HandleFunc("", controllers.CastVote).Methods("POST")
 
 	headersOk := handlers.AllowedHeaders([]string{"Content-Type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})

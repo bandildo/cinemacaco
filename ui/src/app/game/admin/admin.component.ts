@@ -18,10 +18,10 @@ export class AdminComponent {
       name: this.name.value,
     } as Game;
 
-    this.gameService.startGame(game).subscribe();
+    this.gameService.startNewGame(game).subscribe();
   }
 
   endGame() {
-    this.gameService.endCurrentGame().subscribe();
+    this.gameService.endActiveGame().subscribe();
   }
 }

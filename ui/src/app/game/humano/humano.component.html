@@ -3,10 +3,9 @@
     Current Game:
     {{ currentGame.name }}
   </label>
-  <app-voting-buttons [isMacaco]="false"></app-voting-buttons>
+  <app-voting-buttons [gameId]='currentGame.id'></app-voting-buttons>
 </div>
 
 <div *ngIf="!hasGame()">
   <h1>NO ACTIVE GAMES</h1>
 </div>
-

@@ -12,7 +12,7 @@ export class UserService {
     return this.http.post(UrlUtils.generateDbUrl('/users/new'), user) as Observable<User>;
   }
 
-  getUser(uid: string): Observable<User> {
-    return this.http.get(UrlUtils.generateDbUrl(`/users/login/${uid}`)) as Observable<User>;
+  getUser(id: string): Observable<User> {
+    return this.http.get(UrlUtils.generateDbUrl(`/users/login/${id}`)) as Observable<User>;
   }
 }

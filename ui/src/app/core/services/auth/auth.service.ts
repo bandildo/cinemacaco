@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   isAuthenticated(): Observable<boolean> {
-    return this.user.pipe(map(user => !!user.uid));
+    return this.user.pipe(map(user => !!user.id));
   }
 
   isMacaco(): Observable<boolean> {
@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   private getAndUpdateCache(user: User) {
-    this.userService.getUser(user.uid).subscribe(
+    this.userService.getUser(user.id).subscribe(
       gotUser => {
         this.cachedUser.next(gotUser);
       },
@@ -64,7 +64,7 @@ export class AuthService {
 
   generateNewUser(credential: firebase.auth.UserCredential) {
     return {
-      uid: credential.user.uid,
+      id: credential.user.uid,
       email: credential.user.email,
       admin: true,
       macaco: true

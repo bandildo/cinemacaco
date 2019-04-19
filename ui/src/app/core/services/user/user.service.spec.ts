@@ -51,12 +51,12 @@ describe('User Service', () => {
     it('should get logged in user', () => {
       const expectedUser = UserUtils.getTestUser();
 
-      service.getUser(expectedUser.uid).subscribe((response) => {
+      service.getUser(expectedUser.id).subscribe((response) => {
         expect(response).toEqual(expectedUser);
       });
 
       const call = httpMock.expectOne(
-        UrlUtils.generateDbUrl(`/users/login/${expectedUser.uid}`)
+        UrlUtils.generateDbUrl(`/users/login/${expectedUser.id}`)
       );
       expect(call.request.method).toEqual('GET');
 

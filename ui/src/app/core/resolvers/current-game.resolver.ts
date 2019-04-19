@@ -6,9 +6,9 @@ import { Game } from '../../game/models/game.model';
 
 @Injectable()
 export class CurrentGameResolver implements Resolve<Game> {
-  constructor(private votingService: GameService) { }
+  constructor(private gameService: GameService) { }
 
   resolve(): Observable<Game> {
-    return this.votingService.getCurrentGame();
+    return this.gameService.getActiveGame();
   }
 }

@@ -1,5 +1,5 @@
 export interface Game {
   id: string;
   name: string;
-  timestamp: Date;
+  active: boolean;
 }

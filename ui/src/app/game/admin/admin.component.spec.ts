@@ -61,25 +61,25 @@ describe('AdminComponent', () => {
 
       component.name.setValue(game.name);
 
-      spyOn(gameService, 'startGame').and.returnValue(of({}));
+      spyOn(gameService, 'startNewGame').and.returnValue(of({}));
 
       fixture.debugElement
         .query(By.css('button[data-action="game:start"]'))
         .nativeElement.click();
 
-      expect(gameService.startGame).toHaveBeenCalledWith({ name: game.name } as Game);
+      expect(gameService.startNewGame).toHaveBeenCalledWith({ name: game.name } as Game);
     });
   });
 
   describe('End game button', () => {
     it('should ask game service to end the game', () => {
-      spyOn(gameService, 'endCurrentGame').and.returnValue(of({}));
+      spyOn(gameService, 'endActiveGame').and.returnValue(of({}));
 
       fixture.debugElement
         .query(By.css('button[data-action="game:end"]'))
         .nativeElement.click();
 
-      expect(gameService.endCurrentGame).toHaveBeenCalled();
+      expect(gameService.endActiveGame).toHaveBeenCalled();
     });
   });
 });

@@ -3,7 +3,7 @@ import { User } from '../core/models/user.model';
 export default class UserUtils {
   static getTestUser(): User {
     return {
-      uid: 'user-uid',
+      id: 'user-id',
       email: 'test@email.com',
       admin: false,
       macaco: false
@@ -15,7 +15,7 @@ export default class UserUtils {
 
     return {
       user: {
-        uid: testUser.uid,
+        uid: testUser.id,
         email: testUser.email
       }
     } as firebase.auth.UserCredential;

@@ -50,7 +50,7 @@ describe('Auth Service', () => {
 
   describe('is authenticated', () => {
     it('Should return true if user is authenticated', () => {
-      service.setCachedUser({ uid: 'user-uid' } as User);
+      service.setCachedUser({ id: 'user-uid' } as User);
 
       service
         .isAuthenticated()

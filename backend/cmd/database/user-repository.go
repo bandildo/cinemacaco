@@ -5,16 +5,16 @@ import (
 )
 
 type User struct {
-	UID    string `json:"uid"`
+	ID     string `json:"id"`
 	Email  string `json:"email"`
 	Admin  bool   `json:"admin"`
 	Macaco bool   `json:"macaco"`
 }
 
-func GetUser(uid string) *User {
+func GetUser(id string) *User {
 	user := &User{}
 
-	err := db.Table("users").Where("uid = ?", uid).First(user).Error
+	err := db.Table("users").Where("id = ?", id).First(user).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		panic(err)

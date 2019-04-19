@@ -29,7 +29,7 @@ describe('CurrentGameResolver', () => {
     it('should resolve current game when found', () => {
       const expectedGame = GameUtils.getTestGame();
 
-      spyOn(votingService, 'getCurrentGame').and.returnValue(of(expectedGame));
+      spyOn(votingService, 'getActiveGame').and.returnValue(of(expectedGame));
 
       resolver.resolve().subscribe(currentGame => {
         expect(currentGame).toEqual(expectedGame);

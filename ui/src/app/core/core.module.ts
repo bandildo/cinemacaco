@@ -7,6 +7,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthService } from './services/auth/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserService } from './services/user/user.service';
+import { VoteService } from './services/vote/vote.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UserService } from './services/user/user.service';
   providers: [
     AuthService,
     GameService,
+    VoteService,
     UserService,
     CurrentGameResolver
   ]

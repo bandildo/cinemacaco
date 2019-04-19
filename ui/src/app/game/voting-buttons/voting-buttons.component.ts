@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { GameService } from '../../core/services/game/game.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { first, flatMap } from 'rxjs/operators';
+import { VoteService } from 'src/app/core/services/vote/vote.service';
 
 @Component({
   selector: 'app-voting-buttons',
@@ -9,19 +9,15 @@ import { first, flatMap } from 'rxjs/operators';
   styleUrls: ['./voting-buttons.component.css']
 })
 export class VotingButtonsComponent {
-  constructor(private gameService: GameService, private authService: AuthService) { }
+  constructor(private authService: AuthService, private voteService: VoteService) { }
 
   @Input()
-  public isMacaco: boolean;
+  public gameId: string;
 
   onVote(thumbsUp: boolean) {
-    if (this.isMacaco) {
-      this.gameService.castMacacoVote(thumbsUp).subscribe();
-    } else {
-      this.authService.user.pipe(
-        first(),
-        flatMap((user) => this.gameService.castHumanVote(user.uid, thumbsUp))
-      ).subscribe();
-    }
+    this.authService.user.pipe(
+      first(),
+      flatMap((user) => this.voteService.castVote(user.id, this.gameId, thumbsUp))
+    ).subscribe();
   }
 }

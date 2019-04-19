@@ -2,10 +2,10 @@ package controllers
 
 import (
 	"backend/cmd/database"
+	uuid "backend/cmd/helpers"
+
 	"encoding/json"
 	"net/http"
-
-	uuid "github.com/rs/xid"
 )
 
 func GetActiveGame(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +28,7 @@ func StartNewGame(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	game.ID = uuid.New().String()
+	game.ID = uuid.New()
 	game.Active = true
 
 	database.CreateGame(game)

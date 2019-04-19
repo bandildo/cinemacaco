@@ -15,5 +15,5 @@ require (
 	github.com/jinzhu/now v1.0.0 // indirect
 	github.com/lib/pq v1.0.0 // indirect
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
-	github.com/rs/xid v1.2.1
+	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 )

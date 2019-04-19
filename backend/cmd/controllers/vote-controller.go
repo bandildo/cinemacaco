@@ -4,6 +4,8 @@ import (
 	"backend/cmd/database"
 	"encoding/json"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func CastVote(w http.ResponseWriter, r *http.Request) {
@@ -17,4 +19,13 @@ func CastVote(w http.ResponseWriter, r *http.Request) {
 	database.CreateVote(vote)
 
 	w.WriteHeader(http.StatusAccepted)
+}
+
+func UserHasVoted(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+
+	userVotes := database.GetActiveVotesForUser(params["id"])
+	hasVoted := len(*userVotes) > 0
+
+	json.NewEncoder(w).Encode(hasVoted)
 }

@@ -11,9 +11,9 @@ type Game struct {
 }
 
 func GetActiveGame() *Game {
-	game := &Game{}
+	var game Game
 
-	err := db.Table("games").Where("active = true").First(game).Error
+	err := db.Table("games").Where("active = true").First(&game).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		panic(err)
@@ -23,7 +23,7 @@ func GetActiveGame() *Game {
 		return nil
 	}
 
-	return game
+	return &game
 }
 
 func CreateGame(game Game) {

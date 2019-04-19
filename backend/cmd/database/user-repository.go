@@ -12,9 +12,9 @@ type User struct {
 }
 
 func GetUser(id string) *User {
-	user := &User{}
+	var user User
 
-	err := db.Table("users").Where("id = ?", id).First(user).Error
+	err := db.Table("users").Where("id = ?", id).First(&user).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		panic(err)
@@ -24,7 +24,7 @@ func GetUser(id string) *User {
 		return nil
 	}
 
-	return user
+	return &user
 }
 
 func RegisterUser(user User) {

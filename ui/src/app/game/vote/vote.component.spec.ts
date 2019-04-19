@@ -1,17 +1,17 @@
 import { CoreModule } from 'src/app/core/core.module';
 import { ActivatedRoute } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HumanoComponent } from './humano.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { defer, of } from 'rxjs';
 import { GameModule } from '../game.module';
 import { Game } from '../models/game.model';
 import { By } from '@angular/platform-browser';
 import { FirebaseStubsModule } from 'src/app/firebase-stubs/firebase-stubs.module';
+import { VoteComponent } from './vote.component';
 
 describe('HumanoComponent', () => {
-  let component: HumanoComponent;
-  let fixture: ComponentFixture<HumanoComponent>;
+  let component: VoteComponent;
+  let fixture: ComponentFixture<VoteComponent>;
 
   let data;
 
@@ -31,7 +31,7 @@ describe('HumanoComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HumanoComponent);
+    fixture = TestBed.createComponent(VoteComponent);
     component = fixture.componentInstance;
   });
 

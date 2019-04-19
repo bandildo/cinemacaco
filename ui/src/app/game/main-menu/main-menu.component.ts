@@ -8,18 +8,14 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent {
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   onResultsClick() {
     this.router.navigate(['results']);
   }
 
-  onHumanoClick() {
-    this.router.navigate(['humano']);
-  }
-
-  onMacacoClick() {
-    this.router.navigate(['macaco']);
+  onVoteClick() {
+    this.router.navigate(['vote']);
   }
 
   onAdminClick() {

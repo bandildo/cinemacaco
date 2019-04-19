@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/game/models/game.model';
 
 @Component({
-  templateUrl: './humano.component.html',
-  styleUrls: ['./humano.component.css']
+  templateUrl: './vote.component.html',
+  styleUrls: ['./vote.component.css']
 })
-export class HumanoComponent implements OnInit {
+export class VoteComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   currentGame: Game;

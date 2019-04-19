@@ -45,29 +45,11 @@ describe('MainMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Macaco button', () => {
-    it('should exist', () => {
-      expect(
-        fixture.debugElement.query(By.css('button#macacoButton.btn'))
-      ).not.toBeNull();
-      expect(
-        fixture.debugElement.query(By.css('button#macacoButton.btn'))
-          .nativeElement.innerText
-      ).toContain('Macaco');
-    });
-
-    it('should redirect to Macaco page', () => {
+  describe('Vote button', () => {
+    it('should redirect to voting page', () => {
       spyOn(router, 'navigate');
-      component.onMacacoClick();
-      expect(router.navigate).toHaveBeenCalledWith(['macaco']);
-    });
-  });
-
-  describe('Humano button', () => {
-    it('should redirect to Humano page', () => {
-      spyOn(router, 'navigate');
-      component.onHumanoClick();
-      expect(router.navigate).toHaveBeenCalledWith(['humano']);
+      component.onVoteClick();
+      expect(router.navigate).toHaveBeenCalledWith(['vote']);
     });
   });
 
@@ -88,7 +70,7 @@ describe('MainMenuComponent', () => {
       expect(authService.googleLogin).toHaveBeenCalled();
     });
   });
-  
+
   describe('Results button', () => {
     it('should redirect to Results page', () => {
       spyOn(router, 'navigate');

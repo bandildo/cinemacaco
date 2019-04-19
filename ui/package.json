@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "test": "ng test --browsers=ChromeHeadless --code-coverage",
-    "postinstall": "ng build --aot -prod",
+    "postinstall": "ng build --aot --prod",
     "start": "node server.js"
   },
   "private": true,

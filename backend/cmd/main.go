@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -26,11 +27,22 @@ func handleRequests() {
 
 	votesRouter := router.PathPrefix("/votes").Subrouter()
 	votesRouter.HandleFunc("", controllers.CastVote).Methods("POST")
+	votesRouter.HandleFunc("/user/{id}/active", controllers.UserHasVoted).Methods("GET")
 
 	headersOk := handlers.AllowedHeaders([]string{"Content-Type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{"OPTIONS", "GET", "HEAD", "POST", "DELETE"})
-	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(originsOk, headersOk, methodsOk)(router)))
+	log.Fatal(http.ListenAndServe(getPort(), handlers.CORS(originsOk, headersOk, methodsOk)(router)))
+}
+
+func getPort() string {
+	var port = os.Getenv("PORT")
+	// Set a default port if there is nothing in the environment
+	if port == "" {
+		port = "8080"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
 }
 
 func main() {

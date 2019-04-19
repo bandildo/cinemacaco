@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/jinzhu/gorm"
 
@@ -20,11 +21,15 @@ const (
 )
 
 func init() {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+	dbUrl := os.Getenv("DATABASE_URL")
 
-	db, err = gorm.Open("postgres", psqlInfo)
+	if dbUrl == "" {
+		dbUrl = fmt.Sprintf("host=%s port=%d user=%s "+
+			"password=%s dbname=%s sslmode=disable",
+			host, port, user, password, dbname)
+	}
+
+	db, err = gorm.Open("postgres", dbUrl)
 
 	if err != nil {
 		panic(err)

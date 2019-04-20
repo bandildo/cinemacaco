@@ -1,5 +1,5 @@
 heroku git:remote -a cinemacaco
-git push origin master
+cd ..
 git subtree push --prefix ui heroku master
 
 # ng build --prod

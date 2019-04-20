@@ -1,3 +1,3 @@
 heroku git:remote -a cinemacaco-api
-git push origin master
+cd ..
 git subtree push --prefix backend heroku master

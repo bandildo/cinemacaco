@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
 
-  apiUrl:
+  apiURL:
     'https://cinemacaco-api.herokuapp.com',
 
   firebase: {

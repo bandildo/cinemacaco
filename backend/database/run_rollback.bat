@@ -1,1 +1,1 @@
-go build -o migration.exe && migration.exe -down
+go build -o migration.exe && migration.exe "./migrations" -down

@@ -20,7 +20,8 @@ const (
 
 func main() {
 
-	direction := os.Args[1]
+	path := os.Args[1]
+	direction := os.Args[2]
 
 	dbURL := os.Getenv("DATABASE_URL")
 
@@ -42,7 +43,7 @@ func main() {
 
 	fmt.Println("Successfully connected!")
 
-	migrator, _ := gomigrate.NewMigrator(db, gomigrate.Postgres{}, "./migrations")
+	migrator, _ := gomigrate.NewMigrator(db, gomigrate.Postgres{}, path)
 
 	var migrationError error
 	if direction == "-down" {

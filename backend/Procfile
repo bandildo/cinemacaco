@@ -1,2 +1,2 @@
-release: bin/database -up
+release: bin/database "~/database/migrations" -up
 web: bin/api

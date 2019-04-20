@@ -1,2 +1,2 @@
-release: bin/database
+release: bin/database -up
 web: bin/api

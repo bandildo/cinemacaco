@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
 
-  databaseURL:
-    'https://firestore.googleapis.com/v1/projects/cinemacaco-app/databases/(default)/documents',
+  apiUrl:
+    'https://cinemacaco-api.herokuapp.com',
 
   firebase: {
     apiKey: 'AIzaSyDMI839Vb0_gW6yG7osN_Mkk4e94pqB43M',

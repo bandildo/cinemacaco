@@ -1,8 +1,7 @@
 export const environment = {
   production: false,
 
-  databaseURL:
-    // 'https://firestore.googleapis.com/v1/projects/cinemacaco-app-dev/databases/(default)/documents',
+  apiURL:
     'http://localhost:8080',
 
   firebase: {

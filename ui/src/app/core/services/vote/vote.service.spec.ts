@@ -27,7 +27,7 @@ describe('Vote Service', () => {
       service.castVote('user-id', 'game-id', true).subscribe(() => { }, error => fail(error));
 
       const call = httpMock.expectOne(
-        UrlUtils.generateDbUrl('/votes')
+        UrlUtils.api('/votes')
       );
 
       expect(call.request.method).toEqual('POST');

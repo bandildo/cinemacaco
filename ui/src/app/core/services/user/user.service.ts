@@ -9,10 +9,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createUser(user: User): Observable<User> {
-    return this.http.post(UrlUtils.generateDbUrl('/users/new'), user) as Observable<User>;
+    return this.http.post(UrlUtils.api('/users/new'), user) as Observable<User>;
   }
 
   getUser(id: string): Observable<User> {
-    return this.http.get(UrlUtils.generateDbUrl(`/users/login/${id}`)) as Observable<User>;
+    return this.http.get(UrlUtils.api(`/users/login/${id}`)) as Observable<User>;
   }
 }

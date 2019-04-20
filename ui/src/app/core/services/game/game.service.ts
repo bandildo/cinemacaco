@@ -9,19 +9,19 @@ export class GameService {
   constructor(private http: HttpClient) { }
 
   getActiveGame(): Observable<Game> {
-    return this.http.get(UrlUtils.generateDbUrl('/games/active')) as Observable<Game>;
+    return this.http.get(UrlUtils.api('/games/active')) as Observable<Game>;
   }
 
   startNewGame(game: Game): Observable<any> {
     return this.http.post(
-      UrlUtils.generateDbUrl('/games'),
+      UrlUtils.api('/games'),
       game
     );
   }
 
   endActiveGame(): Observable<any> {
     return this.http.delete(
-      UrlUtils.generateDbUrl('/games/active')
+      UrlUtils.api('/games/active')
     );
   }
 }

@@ -39,7 +39,7 @@ describe('User Service', () => {
       );
 
       const call = httpMock.expectOne(
-        UrlUtils.generateDbUrl('/users/new')
+        UrlUtils.api('/users/new')
       );
       expect(call.request.method).toEqual('POST');
 
@@ -56,7 +56,7 @@ describe('User Service', () => {
       });
 
       const call = httpMock.expectOne(
-        UrlUtils.generateDbUrl(`/users/login/${expectedUser.id}`)
+        UrlUtils.api(`/users/login/${expectedUser.id}`)
       );
       expect(call.request.method).toEqual('GET');
 

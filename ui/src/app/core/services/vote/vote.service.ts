@@ -18,7 +18,7 @@ export class VoteService {
     } as Vote;
 
     return this.http.post(
-      UrlUtils.generateDbUrl('/votes'),
+      UrlUtils.api('/votes'),
       vote
     );
   }

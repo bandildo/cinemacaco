@@ -32,7 +32,7 @@ describe('Game Service', () => {
 
       service.startNewGame(game).subscribe(() => { }, error => fail(error));
 
-      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games'));
+      const call = httpMock.expectOne(UrlUtils.api('/games'));
       expect(call.request.method).toEqual('POST');
     });
   });
@@ -45,7 +45,7 @@ describe('Game Service', () => {
         expect(response).toEqual(expectedGame);
       });
 
-      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games/active'));
+      const call = httpMock.expectOne(UrlUtils.api('/games/active'));
       expect(call.request.method).toEqual('GET');
       call.flush(expectedGame);
     });
@@ -55,7 +55,7 @@ describe('Game Service', () => {
     it('Should deactivate the active game', () => {
       service.endActiveGame().subscribe(() => { }, error => fail(error));
 
-      const call = httpMock.expectOne(UrlUtils.generateDbUrl('/games/active'));
+      const call = httpMock.expectOne(UrlUtils.api('/games/active'));
       expect(call.request.method).toEqual('DELETE');
     });
   });

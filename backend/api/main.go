@@ -1,7 +1,7 @@
 package main
 
 import (
-	"backend/cmd/controllers"
+	"backend/api/controllers"
 	"fmt"
 	"log"
 	"net/http"

@@ -1,2 +1,2 @@
-cd cmd
-go build -o backend.exe && backend.exe
+cd api
+go build -o api.exe && api.exe

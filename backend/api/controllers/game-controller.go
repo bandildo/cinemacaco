@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"backend/cmd/database"
-	uuid "backend/cmd/helpers"
+	"backend/api/database"
+	uuid "backend/api/helpers"
 
 	"encoding/json"
 	"net/http"

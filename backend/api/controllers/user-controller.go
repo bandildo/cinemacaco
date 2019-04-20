@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"backend/cmd/database"
+	"backend/api/database"
 	"encoding/json"
 	"net/http"
 

@@ -21,15 +21,15 @@ const (
 )
 
 func init() {
-	dbUrl := os.Getenv("DATABASE_URL")
+	dbURL := os.Getenv("DATABASE_URL")
 
-	if dbUrl == "" {
-		dbUrl = fmt.Sprintf("host=%s port=%d user=%s "+
+	if dbURL == "" {
+		dbURL = fmt.Sprintf("host=%s port=%d user=%s "+
 			"password=%s dbname=%s sslmode=disable",
 			host, port, user, password, dbname)
 	}
 
-	db, err = gorm.Open("postgres", dbUrl)
+	db, err = gorm.Open("postgres", dbURL)
 
 	if err != nil {
 		panic(err)

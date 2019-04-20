@@ -1,1 +1,2 @@
-web: bin/cmd
+release: bin/database
+web: bin/api

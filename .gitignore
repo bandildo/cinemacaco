@@ -1,0 +1,10 @@
+#compiled output
+/ui/dist
+/backend/api/api.exe
+
+# dependencies
+/ui/node_modules
+
+# misc
+/ui/coverage
+crypt-key

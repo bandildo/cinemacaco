@@ -11,8 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func handleRequests() {
-
+func generateRouter() *mux.Router {
 	router := mux.NewRouter()
 	fmt.Println("Started CINEMACACO backend")
 
@@ -29,15 +28,19 @@ func handleRequests() {
 	votesRouter.HandleFunc("", controllers.CastVote).Methods("POST")
 	votesRouter.HandleFunc("/user/{id}/active", controllers.UserHasVoted).Methods("GET")
 
+	return router
+}
+
+func listenAndServe(router *mux.Router) {
 	headersOk := handlers.AllowedHeaders([]string{"Content-Type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{"OPTIONS", "GET", "HEAD", "POST", "DELETE"})
+
 	log.Fatal(http.ListenAndServe(getPort(), handlers.CORS(originsOk, headersOk, methodsOk)(router)))
 }
 
 func getPort() string {
 	var port = os.Getenv("PORT")
-	// Set a default port if there is nothing in the environment
 	if port == "" {
 		port = "8080"
 		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
@@ -46,5 +49,6 @@ func getPort() string {
 }
 
 func main() {
-	handleRequests()
+	router := generateRouter()
+	listenAndServe(router)
 }

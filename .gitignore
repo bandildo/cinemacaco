@@ -8,3 +8,6 @@
 # misc
 /ui/coverage
 crypt-key
+
+# e2e
+/ui/e2e

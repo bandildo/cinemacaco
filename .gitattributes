@@ -1,3 +1,4 @@
 ui/src/environments/environment.ts filter=git-crypt diff=git-crypt
 ui/src/environments/environment.prod.ts filter=git-crypt diff=git-crypt
 backend/api/database/credentials-local.go filter=git-crypt diff=git-crypt
+backend/database/credentials-local.go filter=git-crypt diff=git-crypt

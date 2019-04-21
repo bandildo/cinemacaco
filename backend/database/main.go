@@ -10,14 +10,6 @@ import (
 	"github.com/DavidHuie/gomigrate"
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "admin"
-	dbname   = "cinemacaco_dev"
-)
-
 func main() {
 
 	path := os.Args[1]

@@ -12,14 +12,6 @@ import (
 var db *gorm.DB //database
 var err error
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "admin"
-	dbname   = "cinemacaco_dev"
-)
-
 func init() {
 	dbURL := os.Getenv("DATABASE_URL")
 
